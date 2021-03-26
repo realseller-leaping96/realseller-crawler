@@ -1,0 +1,240 @@
+﻿pl_id,pl_maker,pl_group,pl_model_code,pl_name,pl_model_name
+1,apple,apple,A2221,아이폰11,iphone11
+2,apple,apple,A2215,아이폰11 Pro,iphone11 Pro
+3,apple,apple,A2218,아이폰11 Pro Max,iphone11 Pro Max
+4,apple,apple,A2097,아이폰Xs,iphoneXs
+5,apple,apple,A2101,아이폰Xs Max,iphoneXs Max
+6,apple,apple,A2105,아이폰Xr,iphoneXr
+7,apple,apple,A1901,아이폰X,iphoneX
+8,apple,apple,A1905,아이폰8,iphone8
+9,apple,apple,A1897,아이폰8 Plus,iphone8 Plus
+10,apple,apple,A1778,아이폰7,iphone7
+11,apple,apple,A1784,아이폰7 Plus,iphone7 Plus
+12,apple,apple,A1723,아이폰SE,iphoneSE
+13,apple,apple,A1688,아이폰6s,iphone6s
+14,apple,apple,A1687,아이폰6s Plus,iphone6s Plus
+15,apple,apple,A1586,아이폰6,iphone6
+16,apple,apple,A1524,아이폰6 Plus,iphone6 Plus
+17,apple,apple,A1530,아이폰5s,iphone5s
+18,apple,apple,A1532,아이폰5c,iphone5c
+19,apple,apple,A1428,아이폰5,iphone5
+20,apple,apple,A1387,아이폰4s,iphone4s
+21,apple,apple,A1332,아이폰4,iphone4
+22,samsung,a_series,SM-A908,갤럭시 A90 5G,Galaxy A90 5G
+23,samsung,a_series,SM-A505,갤럭시 A50,Galaxy A50
+24,samsung,a_series,SM-A405,갤럭시 A40,Galaxy A40
+25,samsung,a_series,SM-A305,갤럭시 A30,Galaxy A30
+26,samsung,samsung,SM-A205,갤럭시 와이드4,Galaxy Wide4
+27,samsung,a_series,SM-G887,갤럭시 A9 Pro,Galaxy A9 Pro
+28,samsung,a_series,SM-G885,갤럭시 A8 Star,Galaxy A8 Star
+29,samsung,a_series,SM-A920,갤럭시 A9 2018,Galaxy A9 2018
+30,samsung,a_series,SM-A530,갤럭시 A8 2018,Galaxy A8 2018
+31,samsung,a_series,SM-A600,갤럭시 A6 2018,Galaxy A6 2018
+32,samsung,a_series,SM-A750,갤럭시 A7 2018,Galaxy A7 2018
+33,samsung,a_series,SM-A520,갤럭시 A5 2017,Galaxy A5 2017
+34,samsung,a_series,SM-A810,갤럭시 A8 2016,Galaxy A8 2016
+35,samsung,a_series,SM-A310,갤럭시 A3 2016,Galaxy A3 2016
+36,samsung,a_series,SM-A510,갤럭시 A5 2016,Galaxy A5 2016
+37,samsung,a_series,SM-A710,갤럭시 A7 2016,Galaxy A7 2016
+38,samsung,a_series,SM-A800,갤럭시 A8,Galaxy A8
+39,samsung,a_series,SM-A500,갤럭시 A5,Galaxy A5
+40,samsung,a_series,SM-A300,갤럭시 A3,Galaxy A3
+41,samsung,a_series,SM-A700,갤럭시 A7,Galaxy A7
+42,samsung,a_series,SHW-M100,갤럭시 A,Galaxy A
+43,samsung,j_series,SM-J250,갤럭시 J2 Pro,Galaxy J2 Pro
+44,samsung,j_series,SM-J330,갤럭시 J3 2017,Galaxy J3 2017
+45,samsung,j_series,SM-J530,갤럭시 J5 2017,Galaxy J5 2017
+46,samsung,j_series,SM-J730,갤럭시 J7 2017,Galaxy J7 2017
+47,samsung,j_series,SM-J320,갤럭시 J3 2016,Galaxy J3 2016
+48,samsung,j_series,SM-J710,갤럭시 J7 2016,Galaxy J7 2016
+49,samsung,j_series,SM-J510,갤럭시 J5 2016,Galaxy J5 2016
+50,samsung,j_series,SM-J700,갤럭시 J7,Galaxy J7
+51,samsung,j_series,SM-J600,갤럭시 J6,Galaxy J6
+52,samsung,j_series,SM-J500,갤럭시 J5,Galaxy J5
+53,samsung,j_series,SM-J415,갤럭시 J4 Plus,Galaxy J4 Plus
+54,samsung,s_series,SM-G977,갤럭시S10 5G,GalaxyS10 5G
+55,samsung,s_series,SM-G970,갤럭시S10e,GalaxyS10e
+56,samsung,s_series,SM-G973,갤럭시S10,GalaxyS10
+57,samsung,s_series,SM-G975,갤럭시S10 Plus,GalaxyS10 Plus
+58,samsung,s_series,SM-G960,갤럭시S9,GalaxyS9
+59,samsung,s_series,SM-G965,갤럭시S9 Plus,GalaxyS9 Plus
+60,samsung,s_series,SM-G950,갤럭시S8,GalaxyS8
+61,samsung,s_series,SM-G955,갤럭시S8 Plus,GalaxyS8 Plus
+62,samsung,s_series,SM-G930,갤럭시S7,GalaxyS7
+63,samsung,s_series,SM-G935,갤럭시S7 Edge,GalaxyS7 Edge
+64,samsung,s_series,SM-G928,갤럭시S6 Edge Plus,GalaxyS6 Edge Plus
+65,samsung,s_series,SM-G925,갤럭시S6 Edge,GalaxyS6 Edge
+66,samsung,s_series,SM-G920,갤럭시S6,GalaxyS6
+67,samsung,s_series,SM-G900,갤럭시S5,GalaxyS5
+68,samsung,s_series,SM-G906,갤럭시S5 LTE-A,GalaxyS5 LTE-A
+69,samsung,s_series,SHV-E300,갤럭시S4 ,GalaxyS4
+70,samsung,s_series,SHV-E330,갤럭시S4 LTE-A,GalaxyS4 LTE-A
+71,samsung,s_series,SHV-E470,갤럭시S4 Active,GalaxyS4 Active
+72,samsung,s_series,SM-C105,갤럭시S4 Zoom,GalaxyS4 Zoom
+73,samsung,s_series,SHV-E370,갤럭시S4 Mini,GalaxyS4 Mini
+74,samsung,s_series,SHV-E210,갤럭시S3 LTE,GalaxyS3 LTE
+75,samsung,s_series,SHV-M440,갤럭시S3 3G,GalaxyS3 3G
+76,samsung,s_series,SHW-M250,갤럭시S2 ,GalaxyS2
+77,samsung,s_series,SHV-E120,갤럭시S2 HD LTE,GalaxyS2 HD LTE
+78,samsung,s_series,SHV-E110,갤럭시S2 LTE,GalaxyS2 LTE
+79,samsung,s_series,SHW-M110,갤럭시S,GalaxyS
+80,samsung,s_series,SHW-M190,갤럭시S Hoppin,GalaxyS Hoppin
+81,samsung,samsung,SM-G720,갤럭시그랜드 맥스,GalaxyGrand Max
+82,samsung,samsung,SM-G710,갤럭시그랜드2,GalaxyGrand2
+83,samsung,samsung,SHV-E270,갤럭시그랜드,GalaxyGrand
+84,samsung,note_series,SM-N971,갤럭시노트10,GalaxyNote10
+85,samsung,note_series,SM-N976,갤럭시노트10 Plus,GalaxyNote10 Plus
+86,samsung,note_series,SM-N960,갤럭시노트9,GalaxyNote9
+87,samsung,note_series,SM-N950,갤럭시노트8,GalaxyNote8
+88,samsung,note_series,SM-N935,갤럭시노트FE,GalaxyNoteFE
+89,samsung,note_series,SM-N930,갤럭시노트7,GalaxyNote7
+90,samsung,note_series,SM-N920,갤럭시노트5,GalaxyNote5
+91,samsung,note_series,SM-N910,갤럭시노트4,GalaxyNote4
+92,samsung,note_series,SM-N916,갤럭시노트4 S-LTE,GalaxyNote4 S-LTE
+93,samsung,note_series,SM-N915,갤럭시노트4 Edge,GalaxyNote4 Edge
+94,samsung,note_series,SM-N900,갤럭시노트3,GalaxyNote3
+95,samsung,note_series,SM-N750,갤럭시노트3 Neo,GalaxyNote3 Neo
+96,samsung,note_series,SHV-E250,갤럭시노트2,GalaxyNote2
+97,samsung,note_series,SHV-E160,갤럭시노트,GalaxyNote
+98,samsung,samsung_folder,SM-G160,갤럭시폴더2,GalaxyFolder2
+99,samsung,samsung,SM-G610,갤럭시 온7 2016,Galaxy On7 2016
+100,samsung,samsung,SM-G600,갤럭시와이드,GalaxyWide
+101,samsung,samsung,SM-J737,갤럭시와이드3,GalaxyWide3
+102,samsung,samsung,SM-G850,갤럭시알파,GalaxyAlpha
+103,samsung,samsung,SHW-M585,갤럭시코어,GalaxyCore
+104,samsung,samsung,SHW-M580,갤럭시코어 Safe,GalaxyCore Safe
+105,samsung,samsung,SHW-M570,갤럭시코어 Advance,GalaxyCore Advance
+106,samsung,samsung,SM-T255,갤럭시W,GalaxyW
+107,samsung,samsung,SM-C115,갤럭시줌2,GalaxyZoom2
+108,samsung,samsung,SHV-E500,갤럭시윈,GalaxyWin
+109,samsung,samsung,SM-G910,갤럭시라운드,GalaxyRound
+110,samsung,samsung,SHV-E400,갤럭시골든,GalaxyGolden
+111,samsung,samsung,SHV-E310,갤럭시메가 6.3,GalaxyMega 6.3
+112,samsung,samsung,SHV-E220,갤럭시팝,GalaxyPop
+113,samsung,samsung,SHV-E170,갤럭시R style,GalaxyR style
+114,samsung,samsung,SHW-M340,갤럭시M style,GalaxyM style
+115,samsung,samsung,SHW-M240,갤럭시에이스,GalaxyAce
+116,samsung,samsung,SHW-M130,갤럭시U,GalaxyU
+117,samsung,samsung,SM-A202,갤럭시진2,GalaxyJean2
+118,samsung,samsung,SM-J415-KA,카카오 리틀프렌즈 폰2,kakao LittleFriends Phone2
+119,samsung,samsung,SM-G611,갤럭시 온7 프라임,Galaxy On7 Prime
+121,samsung,samsung_folder,SM-B510,삼성 마스터폰 ,Samsung MasterPhone KT 3G
+122,samsung,samsung_folder,SM-B510,삼성 마스터폰 SKT 3G,Samsung MasterPhone SKT 3G
+123,samsung,samsung_folder,SM-B510,삼성 마스터폰 LG 3G,Samsung MasterPhone LG 3G
+124,lg,lg,LG-F370,F70,F70
+125,lg,g_series,LM-G820,G8 ThinQ,G8 ThinQ
+126,lg,g_series,LM-G710,G7 ThinQ,G7 ThinQ
+127,lg,g_series,LM-G710P,G7 ThinQ Plus,G7 ThinQ Plus
+128,lg,g_series,LGM-G600,G6 ThinQ,G6 ThinQ
+129,lg,g_series,LGM-G600P,G6 ThinQ Plus,G6 ThinQ Plus
+130,lg,g_series,LG-F700,G5,G5
+131,lg,g_series,LG-F500,G4,G4
+132,lg,g_series,LG-F400,G3,G3
+133,lg,g_series,LG-F410,G3 A,G3 A
+134,lg,g_series,LG-F470,G3 Beat,G3 Beat
+135,lg,g_series,LG-F490,G3 Screen,G3 Screen
+136,lg,g_series,LG-F460,G3.Cat6,G3.Cat6
+137,lg,g_series,LG-F320,G2,G2
+138,lg,g_series,LG-F350,G Pro2,G Pro2
+139,lg,g_series,LG-F430,Gx2,Gx2
+140,lg,g_series,LG-F310,Gx,Gx
+141,lg,g_series,LG-F510,G Flex2,G Flex2
+142,lg,g_series,LG-F340,G Flex,G Flex
+143,lg,lg,LG-Q720CS,Stylo 5,Stylo 5
+144,lg,lg,LG-Q720AM,Stylo 5 Plus,Stylo 5 Plus
+145,lg,lg,LG-MP450,Stylus 3,Stylus 3
+146,lg,lg,LG-F720,Stylus 2,Stylus 2
+147,lg,lg,LG-F560,G 스타일로,G Stylo
+148,lg,lg,LG-D690,G3 Stylus,G3 Stylus
+149,lg,k_series,LG-F670,K10,K10
+150,lg,lg,LG-F820,U폰,U phone
+151,lg,lg,LG-F620,클래스,LG CLASS
+152,lg,lg,LG-F540,볼트,LG Volt
+153,lg,lg,LG-F520,아카,LG AKA
+154,lg,q_series,LM-Q925,Q9,Q9
+155,lg,q_series,LM-Q927,Q9 One,Q9 One
+156,lg,q_series,LM-Q815,Q8 2018,Q8 2018
+157,lg,q_series,LGM-X800,Q8,Q Stylus Plus
+158,lg,q_series,LMQ710,Q Stylus,Q Stylus
+159,lg,q_series,LMQ710HS,Q Stylus Alpha,Q Stylus Alpha
+160,lg,q_series,LM-Q720,Q7,Q7
+161,lg,q_series,LM-Q725,Q7 Plus,Q7 Plus
+162,lg,q_series,LG-X600,Q6,Q6
+163,lg,q_series,LGM-X600,Q6 Plus,Q6 Plus
+164,lg,v_series,LM-V500,V50 ThinQ,V50 ThinQ
+165,lg,v_series,LM-V510,V50s ThinQ,V50s ThinQ
+166,lg,v_series,LM-V409,V40 ThinQ,V40 ThinQ
+167,lg,v_series,LM-V350,V35,V35
+168,lg,v_series,LGM-V300S,V30s ThinQ,V30s ThinQ
+169,lg,v_series,LGM-V300,V30,V30
+170,lg,v_series,LG-F800,V20,V20
+171,lg,v_series,LG-F600,V10,V10
+172,lg,x_series,LM-X510,X5 2018,X5 2018
+173,lg,x_series,LM-X410,X4,X4
+174,lg,x_series,LM-X415,X4 Plus,X4 Plus
+175,lg,x_series,LM-X625,X6 2019,X6 2019
+176,lg,x_series,LM-X420,X4 2019,X4 2019
+177,lg,x_series,LM-X220,X2 2019,X2 2019
+178,lg,x_series,LM-X210,X2 2018,X2 2018
+179,lg,x_series,LGM-X320,X500,X500
+180,lg,x_series,LGM-X401,X401,X401
+181,lg,x_series,LGM-K121,X400,X400
+182,lg,x_series,LGM-K120,X300,X300
+183,lg,lg,LG-F750,엑스파워,X Power
+184,lg,x_series,LG-F770,X5,X5
+185,lg,x_series,LG-F740,X스킨,X Skin
+186,lg,x_series,LG-F690,X캠,X Cam
+187,lg,x_series,LG-F650,X스크린,X Screen
+188,lg,lg,LG-H791,넥서스 5x,Nexus 5x
+189,lg,lg,LG-F260,옵티머스 LTE3,Optimus LTE3
+190,lg,lg_folder,LG-F610,와인 스마트 재즈,Wine Smart Jazz
+191,lg,lg_folder,LG-F480,와인 스마트,Wine Smart
+192,lg,lg_folder,LG-T480,와인 스마트 3G,Wine Smart 3G
+193,lg,lg_folder,LM-Y110,LG폴더,LG Folder
+194,lg,lg_folder,LGM-X100,스마트폴더,SmartFolder
+195,samsung,folderble,SM-F907,갤럭시 폴드,Galaxy Fold
+196,apple,apple,A2775,아이폰SE(2020),iphoneSE (2020)
+197,samsung,a_series,SM-A805,갤럭시 A80,Galaxy A80
+198,samsung,folderble,SM-F700,갤럭시 Z플립,Galaxy Z Flip
+199,samsung,s_series,SM-G981,갤럭시 S20,Galaxy S20
+200,samsung,s_series,SM-G986,갤럭시 S20 Plus,Galaxy S20 Plus
+210,samsung,s_series,SM-G988,갤럭시 S20 울트라,Galaxy S20 Ultra
+211,lg,g_series,LM-G900,벨벳,VELVET
+212,lg,q_series,LM-Q510,Q51,Q51
+213,lg,lg_folder,LM-Y120,LG폴더2,LG Folder 2
+214,lg,q_series,LM-Q630,Q61,Q61
+215,samsung,a_series,SM-A315,갤럭시 A31,Galaxy A31
+216,samsung,a_series,SM-A516,갤럭시 A51,Galaxy A51
+217,samsung,a_series,SM-A716,갤럭시 A퀀텀,Galaxy A Quantum
+218,samsung,s_series,SM-G781,갤럭시S20 FE,Galaxy S20 FE
+219,samsung,note_series,SM-N981,갤럭시노트20,GalaxyNote20
+220,samsung,note_series,SM-N986,갤럭시노트20 울트라,GalaxyNote20 Ultra  
+221,lg,q_series,LM-Q310,Q31,LG Q31
+222,lg,q_series,LM-Q520,Q52,LG Q52
+223,lg,q_series,LM-F100,윙,LG Wing
+224,samsung,a_series,SM-A102,갤럭시 A10e,Galaxy A10e
+225,lg,lg,LG-D821,넥서스5,Google Nexus5 16G  
+226,lg,lg,LG-F100,옵티머스 뷰,Optimus VU  
+227,lg,g_series,LG-F180,옵티머스 G,Optimus G  
+228,lg,lg,LG-F200,옵티머스 뷰2,Optimus VU2
+229,lg,g_series,LG-F220,옵티머스 GK,LG Optimus GK  
+230,lg,g_series,LG-F240,옵티머스G 프로,Optimus G Pro  
+231,lg,lg,LG-F300,엘지 뷰3,LG Vu3  
+232,lg,lg,LG-F570,엘지 밴드플레이,LG 밴드플레이  
+233,lg,lg,LG-KU5400,프라다폰 3.0,PRADA 3.0  
+234,lg,lg,LG-LU5400,프라다폰 3.0,PRADA 3.0  
+235,lg,q_series,LG-LU6500,옵티머스Q2,OPTIMUS Q2  
+236,lg,lg,LG-SU540,프라다폰 3.0,PRADA 3.0  
+237,lg,q_series,LM-Q727,Q7,LG Q7  
+238,lg,q_series,LM-Q730,Q70,LG Q70  
+239,lg,q_series,LM-Q920,Q92,LG Q92  
+240,lg,z_series,SU950,옵티머스 Z,Optimus Z  
+241,samsung,samsung,SHV-E275,갤럭시 그랜드,GALAXY GRAND  
+242,samsung,samsung,SHW-M290,갤럭시 지오,GALAXY Gio  
+243,samsung,a_series,SM-A105,갤럭시 A10,Samsung Galaxy A10  
+244,samsung,a_series,SM-A217,갤럭시 A21s,Samsung Galaxy A21s  
+245,samsung,a_series,SM-A720,갤럭시 A7 2017,Samsung Galaxy A7 2017  
+246,samsung,samsung,SM-G150,갤럭시 폴더,Galaxy Folder  
+247,samsung,samsung,SM-G165,갤럭시 폴더2,Samsung Galaxy Folder2 LTE  
+248,samsung,samsung,SM-J727,갤럭시 와이드2,Samsung Galaxy Wide 2  
+249,samsung,m_series,SM-M205,갤럭시 M20,Samsung Galaxy M20  
