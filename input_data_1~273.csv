@@ -213,28 +213,61 @@
 222,lg,q_series,LM-Q520,Q52,LG Q52
 223,lg,q_series,LM-F100,윙,LG Wing
 224,samsung,a_series,SM-A102,갤럭시 A10e,Galaxy A10e
-225,lg,lg,LG-D821,넥서스5,Google Nexus5 16G  
-226,lg,lg,LG-F100,옵티머스 뷰,Optimus VU  
-227,lg,g_series,LG-F180,옵티머스 G,Optimus G  
-228,lg,lg,LG-F200,옵티머스 뷰2,Optimus VU2
-229,lg,g_series,LG-F220,옵티머스 GK,LG Optimus GK  
-230,lg,g_series,LG-F240,옵티머스G 프로,Optimus G Pro  
-231,lg,lg,LG-F300,엘지 뷰3,LG Vu3  
-232,lg,lg,LG-F570,엘지 밴드플레이,LG 밴드플레이  
-233,lg,lg,LG-KU5400,프라다폰 3.0,PRADA 3.0  
-234,lg,lg,LG-LU5400,프라다폰 3.0,PRADA 3.0  
-235,lg,q_series,LG-LU6500,옵티머스Q2,OPTIMUS Q2  
-236,lg,lg,LG-SU540,프라다폰 3.0,PRADA 3.0  
-237,lg,q_series,LM-Q727,Q7,LG Q7  
-238,lg,q_series,LM-Q730,Q70,LG Q70  
-239,lg,q_series,LM-Q920,Q92,LG Q92  
-240,lg,z_series,SU950,옵티머스 Z,Optimus Z  
-241,samsung,samsung,SHV-E275,갤럭시 그랜드,GALAXY GRAND  
-242,samsung,samsung,SHW-M290,갤럭시 지오,GALAXY Gio  
-243,samsung,a_series,SM-A105,갤럭시 A10,Samsung Galaxy A10  
-244,samsung,a_series,SM-A217,갤럭시 A21s,Samsung Galaxy A21s  
-245,samsung,a_series,SM-A720,갤럭시 A7 2017,Samsung Galaxy A7 2017  
-246,samsung,samsung,SM-G150,갤럭시 폴더,Galaxy Folder  
-247,samsung,samsung,SM-G165,갤럭시 폴더2,Samsung Galaxy Folder2 LTE  
-248,samsung,samsung,SM-J727,갤럭시 와이드2,Samsung Galaxy Wide 2  
-249,samsung,m_series,SM-M205,갤럭시 M20,Samsung Galaxy M20  
+,lg,lg,LG-D821,넥서스5,Google Nexus5 16G  
+,lg,lg,LG-F100,옵티머스 뷰,Optimus VU  
+,lg,g_series,LG-F180,옵티머스 G,Optimus G  
+,lg,lg,LG-F200,옵티머스 뷰2,Optimus VU2
+,lg,g_series,LG-F220,옵티머스 GK,LG Optimus GK  
+,lg,g_series,LG-F240,옵티머스G 프로,Optimus G Pro  
+,lg,lg,LG-F300,엘지 뷰3,LG Vu3  
+,lg,lg,LG-F570,엘지 밴드플레이,LG 밴드플레이  
+,lg,lg,LG-KU5400,프라다폰 3.0,PRADA 3.0  
+,lg,lg,LG-LU5400,프라다폰 3.0,PRADA 3.0  
+,lg,q_series,LG-LU6500,옵티머스Q2,OPTIMUS Q2  
+,lg,lg,LG-SU540,프라다폰 3.0,PRADA 3.0  
+,lg,q_series,LM-Q727,Q7,LG Q7  
+,lg,q_series,LM-Q730,Q70,LG Q70  
+,lg,q_series,LM-Q920,Q92,LG Q92  
+,lg,z_series,SU950,옵티머스 Z,Optimus Z  
+,samsung,samsung,SHV-E275,갤럭시 그랜드,GALAXY GRAND  
+,samsung,samsung,SHW-M290,갤럭시 지오,GALAXY Gio  
+,samsung,a_series,SM-A105,갤럭시 A10,Samsung Galaxy A10  
+,samsung,a_series,SM-A217,갤럭시 A21s,Samsung Galaxy A21s  
+,samsung,a_series,SM-A720,갤럭시 A7 2017,Samsung Galaxy A7 2017  
+,samsung,samsung,SM-G150,갤럭시 폴더,Galaxy Folder  
+,samsung,samsung,SM-G165,갤럭시 폴더2,Samsung Galaxy Folder2 LTE  
+,samsung,samsung,SM-J727,갤럭시 와이드2,Samsung Galaxy Wide 2  
+,samsung,m_series,SM-M205,갤럭시 M20,Samsung Galaxy M20  
+,lg,,LG-D150,,LG-D150
+,lg,,LG-D329,LG L70,L70
+,lg,,LG-D700,옵티머스 L9,LG Optimus L9
+,lg,,LG-F120K,옵티머스 LTE 태그,LG Optimus LTE Tag
+,lg,,LG-F160K,옵티머스 LTE2,LG Optimus LTE2
+,lg,,LG-F310L,엘지 지엑스 GX로밍,LG Gx
+,lg,,LG-F430L,엘지 지엑스2,Gx2
+,lg,,LG-F440L,아이스크림 스마트,Ice cream Smart
+,lg,,LG-F580L,젠틀,Gentle
+,lg,,LG-F620K,엘지 클래스,LG Class
+,lg,,LG-KH5200,안드로-1,Eve
+,lg,,LG-KU3700,옵티머스원,Optimus One
+,lg,,LG-KU5900,옵티머스블랙,Optimus Black
+,lg,,LG-LU3000,옵티머스 마하,Optimus Mach
+,lg,,LG-LU6200,옵티머스 LTE,Optimus LTE
+,lg,,LG-LU6800,옵티머스빅,Optimus Big
+,lg,,LG-T280,옵티머스 L7,LG Optimus L7
+,lg,,LG-SU370,옵티머스원,Optimus One
+,lg,,LG-SU640,옵티머스 LTE,Optimus LTE
+,lg,,LG-SU660,옵티머스2X,Optimus 2X
+,lg,,LG-SU760,옵티머스3D,Optimus 3D
+,lg,,LG-SU870,옵티머스 3D 큐브,Optimus 3D MAX
+,lg,,LG-SU880,옵티머스EX,Optimus EX
+,lg,,LM-Q720,Q7,LG Stylo 5+
+,lg,,LM-Q730,Q70,Stylo 6
+,lg,,LM-V500,V50 ThinQ 자급제,V50 ThinQ
+,lg,,LM-X210,X2,LG K9
+,lg,,LM-X220,X2 2019,LG K8s
+,lg,,LM-X420,X4 2019,LM-X420
+,samsung,,Nexus S,넥서스 S,Nexus S
+,samsung,,SHW-M220L,갤럭시 네오,Galaxy Neo
+,samsung,,SM-F916N,갤럭시 Z 폴드2,Galaxy Z Fold2 5G
+,samsung,,SPH-M840,쇼옴니아,Galaxy Prevail2
