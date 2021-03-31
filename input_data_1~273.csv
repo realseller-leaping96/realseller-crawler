@@ -101,8 +101,8 @@
 100,samsung,samsung,SM-G600,갤럭시와이드,GalaxyWide,,갤럭시 와이드,https://namu.wiki/w/%EA%B0%A4%EB%9F%AD%EC%8B%9C%20%EC%99%80%EC%9D%B4%EB%93%9C,
 101,samsung,samsung,SM-J737,갤럭시와이드3,GalaxyWide3,,갤럭시 와이드3,https://namu.wiki/w/%EA%B0%A4%EB%9F%AD%EC%8B%9C%20%EC%99%80%EC%9D%B4%EB%93%9C3,
 102,samsung,samsung,SM-G850,갤럭시알파,GalaxyAlpha,,갤럭시 알파,https://namu.wiki/w/%EA%B0%A4%EB%9F%AD%EC%8B%9C%20%EC%95%8C%ED%8C%8C,
-103,samsung,samsung,SHW-M585,갤럭시코어,GalaxyCore,,갤럭시 코어,https://namu.wiki/w/%EA%B0%A4%EB%9F%AD%EC%8B%9C%20%EC%BD%94%EC%96%B4,
-104,samsung,samsung,SHW-M580,갤럭시코어 Safe,GalaxyCore Safe,,갤럭시 코어,https://namu.wiki/w/%EA%B0%A4%EB%9F%AD%EC%8B%9C%20%EC%BD%94%EC%96%B4,
+103,samsung,samsung,SHW-M585,갤럭시코어,GalaxyCore,,갤럭시 코어,,https://namu.wiki/w/%EA%B0%A4%EB%9F%AD%EC%8B%9C%20%EC%BD%94%EC%96%B4
+104,samsung,samsung,SHW-M580,갤럭시코어 Safe,GalaxyCore Safe,,갤럭시 코어,,https://namu.wiki/w/%EA%B0%A4%EB%9F%AD%EC%8B%9C%20%EC%BD%94%EC%96%B4
 105,samsung,samsung,SHW-M570,갤럭시코어 Advance,GalaxyCore Advance,,갤럭시 코어 어드밴스,https://namu.wiki/w/%EA%B0%A4%EB%9F%AD%EC%8B%9C%20%EC%BD%94%EC%96%B4%20%EC%96%B4%EB%93%9C%EB%B0%B4%EC%8A%A4,
 106,samsung,samsung,SM-T255,갤럭시W,GalaxyW,,갤럭시 W,https://namu.wiki/w/%EA%B0%A4%EB%9F%AD%EC%8B%9C%20W,
 107,samsung,samsung,SM-C115,갤럭시줌2,GalaxyZoom2,,갤럭시 줌2,https://namu.wiki/w/%EA%B0%A4%EB%9F%AD%EC%8B%9C%20%EC%A4%8C2,
@@ -199,7 +199,7 @@
 199,samsung,s_series,SM-G981,갤럭시 S20,Galaxy S20,,갤럭시 S20,https://namu.wiki/w/%EA%B0%A4%EB%9F%AD%EC%8B%9C%20S20,
 200,samsung,s_series,SM-G986,갤럭시 S20 Plus,Galaxy S20 Plus,,갤럭시 S20+,https://namu.wiki/w/%EA%B0%A4%EB%9F%AD%EC%8B%9C%20S20%2B,
 210,samsung,s_series,SM-G988,갤럭시 S20 울트라,Galaxy S20 Ultra,,갤럭시 S20 Ultra,https://namu.wiki/w/%EA%B0%A4%EB%9F%AD%EC%8B%9C%20S20%20Ultra,
-211,lg,g_series,LM-G900,벨벳,VELVET,,벨벳,https://namu.wiki/w/%EB%B2%A8%EB%B2%B3,
+211,lg,g_series,LM-G900,벨벳,VELVET,,LG VELVET,https://namu.wiki/w/LG%20VELVET,
 212,lg,q_series,LM-Q510,Q51,Q51,,Q51,https://namu.wiki/w/Q51,
 213,lg,lg_folder,LM-Y120,LG폴더2,LG Folder 2,,LG 폴더2,https://namu.wiki/w/LG%20%ED%8F%B4%EB%8D%942,
 214,lg,q_series,LM-Q630,Q61,Q61,,Q61,https://namu.wiki/w/Q61,
