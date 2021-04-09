@@ -32,9 +32,9 @@ from crawl_terminal_row import crawl_terminal_row
 
 #######################입력 파일 로드################################
 
-df_input = pd.read_csv('input_data_1~273.csv')
+df_input = pd.read_csv('input_data_~0408.csv')
 df_input=df_input.fillna('')
-# print(df_input.iloc[102])
+#print(df_input.iloc[102])
 
 #######################출력 형식 로드################################
 df_output = df_init() #출력할 데이터 프레임형식 초기화
@@ -45,18 +45,18 @@ df_output = df_init() #출력할 데이터 프레임형식 초기화
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
 chrome_options.add_argument("--headless")
-driver  = webdriver.Chrome()
+driver  = webdriver.Chrome(options = chrome_options)
 driver.implicitly_wait(3)
 
 
 
-for index in range(1):
-
+for index in range(len(df_input)):
+    print(index,  df_input.iloc[index]['나무위키링크단품'] )
     temp_dict = dict()
         
-    temp_dict["모델명"] = df_input.iloc[index][4]
-    temp_dict["모델코드"] = df_input.iloc[index][3]
-    temp_dict["제조회사"] = df_input.iloc[index][1]
+    temp_dict["모델명"] = df_input.iloc[index]['pl_name']
+    temp_dict["모델코드"] = df_input.iloc[index]['pl_model_code']
+    temp_dict["제조회사"] = df_input.iloc[index]['pl_maker']
 
     if df_input.iloc[index]['나무위키링크단품'] != "":
         driver.get(df_input.iloc[index]['나무위키링크단품'])
@@ -117,6 +117,6 @@ for index in range(1):
         
     df_output = df_output.append(pd.DataFrame(temp_dict,index=[0]))
 
-df_output.to_csv("test0408.csv", encoding = "utf-8-sig")
+df_output.to_csv("namu_detail_0409.csv", encoding = "utf-8-sig")
 
 os.system("pause")

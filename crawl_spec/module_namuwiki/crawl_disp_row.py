@@ -12,7 +12,7 @@ def crawl_disp_row(temp_dict, td) :
 
 
         temp_dict["화면비"] = re.search('[0-9.]+:[0-9.]+(\+[0-9.?]+:[0-9.?]+)? 비율', display_part1).group().replace(" 비율","")
-        temp_dict["화면해상도"] = re.search('([0-9]+ x [0-9]+)', display_part1).group() 
+        temp_dict["화면해상도"] = re.search('([0-9]+ (x|X) [0-9]+)', display_part1).group() 
         temp_dict["ppi"] = re.sub('[\(\)]','',re.search('\([0-9.-]+ ppi\)|\([0-9]+ppi\)',"".join(display_part1)).group())
 
         disp_table = td[1].select(".wiki-table-wrap > table")

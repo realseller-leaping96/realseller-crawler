@@ -5,7 +5,7 @@ def crawl_camera_row(temp_dict,td):
     data = td[1]
     #temp_dict["카메라"] = camera
     
-    if camera.find("[ 전면 카메라 정보") != -1:
+    if camera.find("[ 전면 카메라 정보") != -1 or camera.find("[ 전면/커버 카메라 정보") != -1:
         
         if td[1].select(".wiki-table-wrap > table"):
 
