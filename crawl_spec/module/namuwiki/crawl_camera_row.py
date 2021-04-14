@@ -23,7 +23,7 @@ def crawl_camera_row(temp_dict,td):
                         front_camera = td.text
                     elif td.text.find("화소") != -1:
                         front_camera += (" + ") + (td.text)
-            temp_dict["전면카메라"] = front_camera
+            temp_dict["전면카메라"] = front_camera.replace("전면","").replace(" 화소","")
     
     elif camera.find("전면") != -1:
         
@@ -33,7 +33,7 @@ def crawl_camera_row(temp_dict,td):
             pass
         else:
             camera = camera.replace("\n","")                       
-            temp_dict["전면카메라"] = re.search('전면[0-9 ,만/팝업형]+화소', camera).group()
+            temp_dict["전면카메라"] = re.search('전면[0-9 ,만/팝업형]+화소', camera).group().replace("전면","").replace(" 화소","")
     
 
     if data.find("[ 후면 카메라 정보") != -1:
@@ -56,6 +56,6 @@ def crawl_camera_row(temp_dict,td):
                         
             temp_dict["후면카메라"] = back_camera
     elif camera.find("후면") != -1:
-        temp_dict["후면카메라"] = re.search('후면( OIS 지원 )?[0-9 ,만]+화소', camera).group()
+        temp_dict["후면카메라"] = re.search('후면( OIS 지원 )?[0-9 ,만]+화소', camera).group().replace("후면","").replace(" 화소","")
 
     return temp_dict

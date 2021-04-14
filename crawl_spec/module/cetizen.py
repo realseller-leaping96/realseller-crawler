@@ -81,13 +81,13 @@ def parse_cetizen(df_input,driver,crawl_data, a,b):
                 "화면크기(센치)": "",
                 "화면크기(인치)":collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[7]/div[2]/span',""),
                 "패널종류": collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[8]/div[4]/span',""),
-                "화면해상도": collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[7]/div[4]/span',""), 
-                "ppi": collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[8]/div[2]/span',""), 
+                "화면해상도": collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[7]/div[4]/span',"").replace(" 픽셀",""), 
+                "ppi": collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[8]/div[2]/span',"".replace(" ppi","")), 
                 "최대주사율": "",
                 "화면비": "",
                 "화면면적": "",
-                "화면폭": collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[9]/div[2]/span',""),
-                "화면높이": collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[9]/div[4]/span',""),
+                "화면폭": collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[9]/div[2]/span',"").replace(" mm",""),
+                "화면높이": collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[9]/div[4]/span',"").replace(" mm",""),
                 "HDR규격": "",
                 
                 #시스템
@@ -158,7 +158,7 @@ def parse_cetizen(df_input,driver,crawl_data, a,b):
                 #배터리
                 "기타": "",
                 "충전단자": "",
-                "배터리용량": collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[22]/div[2]/span',""),
+                "배터리용량": collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[22]/div[2]/span',"").replace(" mAh",""),
                 "배터리타입": collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[22]/div[4]/span',""),
                 "배터리특징": collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[23]/div[2]/span',""),
                 "배터리장착방식": "",
@@ -173,7 +173,7 @@ def parse_cetizen(df_input,driver,crawl_data, a,b):
                 "가로": collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[4]/div[4]/span',"가로"),
                 "세로": collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[4]/div[4]/span',"세로"),
                 "두께": collet_one(driver,'//*[@id="product_specview"]/div[1]/form/div[4]/div[4]/span',"두께"),
-                "무게": driver.find_element_by_xpath('//*[@id="product_specview"]/div[1]/form/div[5]/div[2]/span').text
+                "무게": driver.find_element_by_xpath('//*[@id="product_specview"]/div[1]/form/div[5]/div[2]/span').text.replace("g","")
             }
             my_dict['사이트명'] = "세티즌"
             crawl_data = crawl_data.append(pd.DataFrame(my_dict,index=[0]))

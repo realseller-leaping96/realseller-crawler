@@ -7,7 +7,7 @@ def crawl_battery_row(temp_dict,td):
     if battery.find("[ 충전 기술 정보") != -1:
         bat_part1 = re.search('.*\[ 충전 기술 정보', battery).group().replace("[ 충전 기술 정보","")
         storage = re.search('[0-9 .,]+mAh', bat_part1).group()
-        temp_dict["배터리용량"] = storage
+        temp_dict["배터리용량"] = storage.replace(" ","").replace("mAh","")
         temp_dict["배터리타입"] = bat_part1.replace(storage,"")
     else:
         pass

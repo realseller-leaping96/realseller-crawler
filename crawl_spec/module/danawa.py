@@ -62,9 +62,11 @@ def parse_danawa(df_input, driver, crawl_data, a,b):
                         if th[0].text == "제조회사":
                             temp_dict["제조회사"] = td[0].text
                         elif th[0].text == "운영체제":
-                            temp_dict["운영체제"] = td[0].text
+                            temp_dict["운영체제"] = td[0].text.replace("출시OS: ","")
+                        elif th[0].text == "화면크기(센치)":
+                            temp_dict["화면크기(센치)"] = re.search('[0-9.]+cm', td[0].text ).group()
                         elif th[0].text == "화면크기(인치)":
-                            temp_dict["화면크기(인치)"] = td[0].text
+                            temp_dict["화면크기(인치)"] = re.search('\([0-9.]+(인치)?\)', td[0].text ).group().replace("인치","")
                         elif th[0].text == "화면해상도":
                             temp_dict["화면해상도"] = td[0].text
                         elif th[0].text == "최대주사율":
@@ -72,14 +74,23 @@ def parse_danawa(df_input, driver, crawl_data, a,b):
                         elif th[0].text == "화면면적":
                             temp_dict["화면면적"] = td[0].text
 
+
+
+
+
                         elif th[0].text == "AP종류":
                             temp_dict["AP종류"] = td[0].text
                         elif th[0].text == "코어클럭":
                             temp_dict["코어클럭"] = td[0].text
                         elif th[0].text == "시스템램":
-                            temp_dict["시스템램"] = td[0].text
+                            temp_dict["시스템램"] = td[0].text.replace("램:","")
                         elif th[0].text == "저장장치":
                             temp_dict["저장장치"] = td[0].text
+
+
+
+
+
 
                         elif th[0].text == "5G":
                             temp_dict["5G"] = td[0].text
@@ -88,12 +99,20 @@ def parse_danawa(df_input, driver, crawl_data, a,b):
                         elif th[0].text == "유심타입":
                             temp_dict["유심타입"] = td[0].text
 
+
+
+
+
+
                         elif th[0].text == "카메라타입":
                             temp_dict["카메라타입"] = td[0].text
                         elif th[0].text == "전면카메라":
-                            temp_dict["전면카메라"] = td[0].text
+                            temp_dict["전면카메라"] = td[0].text.replace("전면:","").replace("화소:","")
                         elif th[0].text == "조리개값":
                             temp_dict["조리개 값"] = td[0].text
+
+
+
                             
                         elif th[0].text == "손떨림방지":
                             temp_dict["손떨림방지"] = td[0].text
@@ -109,12 +128,22 @@ def parse_danawa(df_input, driver, crawl_data, a,b):
                             temp_dict["파노라마"] = td[0].text
                         elif th[0].text == "야간모드촬영":
                             temp_dict["야간모드 촬영"] = td[0].text
+
+
+
+
+
                             
 
                         elif th[0].text == "이어폰단자":
                             temp_dict["이어폰단자"] = td[0].text
                         elif th[0].text == "고음질재생":
                             temp_dict["고음질재생"] = td[0].text
+
+
+
+
+
 
                         elif th[0].text == "지문인식":
                             temp_dict["지문인식"] = td[0].text
@@ -125,6 +154,11 @@ def parse_danawa(df_input, driver, crawl_data, a,b):
                         elif th[0].text == "터치펜":
                             temp_dict["터치펜"] = td[0].text
 
+
+
+
+
+
                         elif th[0].text == "충전단자":
                             temp_dict["충전단자"] = td[0].text
                         elif th[0].text == "배터리장착방식":
@@ -132,10 +166,14 @@ def parse_danawa(df_input, driver, crawl_data, a,b):
                         elif th[0].text == "고속충전기술":
                             temp_dict["고속충전기술"] = td[0].text
 
+
+
+
+
+
                         elif th[0].text == "가로":
-                            temp_dict["가로"] = td[0].text
-                        elif th[0].text == "두께":
-                            temp_dict["두께"] = td[0].text
+                            temp_dict["가로"] = td[0].text.replace("가로:","").replace("mm:","")
+                            temp_dict["두께"] = td[0].text.replace("두께:","").replace("mm:","")
 
                         ###########################################
 
@@ -144,23 +182,35 @@ def parse_danawa(df_input, driver, crawl_data, a,b):
                         elif th[1].text == "판매방식":
                             temp_dict["판매방식"] = td[1].text
 
+
+
+
+
                         elif th[1].text == "패널종류":
                             temp_dict["패널종류"] = td[1].text
                         elif th[1].text == "ppi":
-                            temp_dict["ppi"] = td[1].text
+                            temp_dict["ppi"] = td[1].text.replace("ppi","")
                         elif th[1].text == "화면비":
                             temp_dict["화면비"] = td[1].text
                         elif th[1].text == "HDR규격":
                             temp_dict["HDR규격"] = td[1].text
+
+
+
+
 
                         elif th[1].text == "코어갯수":
                             temp_dict["코어갯수"] = td[1].text
                         elif th[1].text == "그래픽코어":
                             temp_dict["그래픽코어"] = td[1].text
                         elif th[1].text == "내장메모리":
-                            temp_dict["내장메모리"] = td[1].text
+                            temp_dict["내장메모리"] = td[1].text.replace("내장","")
                         elif th[1].text == "외장메모리":
                             temp_dict["외장메모리"] = td[1].text
+
+
+
+
 
                         elif th[1].text == "4G":
                             temp_dict["4G"] = td[1].text
@@ -169,12 +219,20 @@ def parse_danawa(df_input, driver, crawl_data, a,b):
                         elif th[1].text == "듀얼유심":
                             temp_dict["듀얼유심"] = td[1].text
 
+
+
+
+
                         elif th[1].text == "후면카메라":
-                            temp_dict["후면카메라"] = td[1].text
+                            temp_dict["후면카메라"] = td[1].text.replace("후면:","").replace("화소:","")
                         elif th[1].text == "동영상촬영":
-                            temp_dict["동영상촬영"] = td[1].text
+                            temp_dict["동영상촬영"] = td[1].text.replace("동영상:","").replace("화소:","")
                         elif th[1].text == "손떨림보정":
                             temp_dict["손떨림보정"] = td[1].text
+
+
+
+
                             
                         elif th[1].text == "카메라플래시":
                             temp_dict["카메라플래시"] = td[1].text
@@ -189,12 +247,18 @@ def parse_danawa(df_input, driver, crawl_data, a,b):
                         elif th[1].text == "TOF센서":
                             temp_dict["TOF센서"] = td[1].text
 
+
+
+
                         elif th[1].text == "스피커":
                             temp_dict["스피커"] = td[1].text
                         elif th[1].text == "사운드기술":
                             temp_dict["사운드기술"] = td[1].text
                         elif th[1].text == "얼굴인식":
                             temp_dict["얼굴인식"] = td[1].text
+
+
+
 
                         elif th[1].text == "음성잠금해제":
                             temp_dict["음성잠금해제"] = td[1].text
@@ -203,17 +267,23 @@ def parse_danawa(df_input, driver, crawl_data, a,b):
                         elif th[1].text == "방수/방진":
                             temp_dict["방수/방진"] = td[1].text
 
+
+
+
                         elif th[1].text == "배터리용량":
-                            temp_dict["배터리용량"] = td[1].text
+                            temp_dict["배터리용량"] = td[1].text.replace(",","").replace("mAh","")
                         elif th[1].text == "충전지원":
                             temp_dict["충전지원"] = td[1].text
                         elif th[1].text == "무선충전":
                             temp_dict["무선충전"] = td[1].text
 
+
+
+
                         elif th[1].text == "세로":
-                            temp_dict["세로"] = td[1].text
+                            temp_dict["세로"] = td[1].text.replace("세로:","").replace("mm:","")
                         elif th[1].text == "무게":
-                            temp_dict["무게"] = td[1].text
+                            temp_dict["무게"] = td[1].text.replace("무게:","").replace("g:","")
 
                     
             temp_dict["타겟제품"] = driver.find_element_by_xpath('//*[@id="blog_content"]/div[2]/div[1]/h3').text
