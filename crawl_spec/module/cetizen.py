@@ -18,12 +18,18 @@ def collet_one(driver,xpath,option):
     
     if option == "5G" and result.find("5G") != -1:
         result = "5G"
-        
+
+    if option == "5G" and result != "5G":
+        result = ""
+
     if option == "4G" and result.find("4G") != -1:
         result = "4G"
     
     if option == "4G" and result.find("LTE") != -1:
         result = "4G"
+
+    if option == "4G" and result == "":
+        result = ""
         
     if option == "유심타입" and result.find("/") != -1:
         result = result.split("/")[0]
@@ -63,7 +69,7 @@ def parse_cetizen(df_input,driver,crawl_data, a,b):
         url1 = "https://review.cetizen.com/review.php?q=phone&just_one=&just_one_name=&just_one_pcat=&keyword_p="
         url2 = "&p_data=3&p_split=&recnum=10"
         driver.get(url1+df_input.iloc[index][2]+url2)
-    
+        print(index,url1+df_input.iloc[index][2]+url2)
         if hasxpath(driver,'//*[@id="product_list"]/div/div[3]/div[1]/div[1]/div/a/span') == True:
             driver.find_element_by_xpath('//*[@id="product_list"]/div/div[3]/div[1]/div[1]/div/a/span').click()
             driver.implicitly_wait(10)
@@ -179,5 +185,5 @@ def parse_cetizen(df_input,driver,crawl_data, a,b):
             crawl_data = crawl_data.append(pd.DataFrame(my_dict,index=[0]))
         else:
             pass
-        print(index)
+        
     return crawl_data

@@ -15,14 +15,15 @@ def hasxpath(driver,xpath):
 
 def parse_danawa(df_input, driver, crawl_data, a,b):
     for index in range(a,b):
-        print(index)
+        
         url1 = "http://search.danawa.com/dsearch.php?query="
         url2 = "&cate_c1=224&cate_c2=48419&volumeType=allvs&page=1&limit=40&sort=saveDESC&list=list&boost=true&addDelivery=N&recommendedSort=Y&defaultUICategoryCode=122514&defaultPhysicsCategoryCode=224%7C48419%7C48766%7C0&defaultVmTab=1363&defaultVaTab=1401402&tab=main"
         driver.get(url1+df_input.iloc[index]['pl_name']+url2)
-    
         if hasxpath(driver,'//*[@id="productListArea"]/div[3]/ul/li[1]/div/div[1]/a[1]') == True:
+            
             href = driver.find_element_by_xpath('//*[@id="productListArea"]/div[3]/ul/li[1]/div/div[1]/a[1]').get_attribute("href")
             driver.get(href)
+            print(index, href)
             driver.implicitly_wait(10)
             
             
@@ -65,7 +66,7 @@ def parse_danawa(df_input, driver, crawl_data, a,b):
                             temp_dict["운영체제"] = td[0].text.replace("출시OS: ","")
                         elif th[0].text == "화면크기(센치)":
                             temp_dict["화면크기(센치)"] = re.search('[0-9.]+cm', td[0].text ).group()
-                        elif th[0].text == "화면크기(인치)":
+                        elif th[0].text == "화면크기(인치)" and td[0].text.find("~") == -1 and td[0].text != "":
                             temp_dict["화면크기(인치)"] = re.search('\([0-9.]+(인치)?\)', td[0].text ).group().replace("인치","")
                         elif th[0].text == "화면해상도":
                             temp_dict["화면해상도"] = td[0].text
@@ -173,6 +174,8 @@ def parse_danawa(df_input, driver, crawl_data, a,b):
 
                         elif th[0].text == "가로":
                             temp_dict["가로"] = td[0].text.replace("가로:","").replace("mm:","")
+
+                        elif th[0].text == "두께":
                             temp_dict["두께"] = td[0].text.replace("두께:","").replace("mm:","")
 
                         ###########################################
@@ -251,7 +254,7 @@ def parse_danawa(df_input, driver, crawl_data, a,b):
 
 
                         elif th[1].text == "스피커":
-                            temp_dict["스피커"] = td[1].text
+                            temp_dict["스피커"] = td[1].text.replace("스피커:","")
                         elif th[1].text == "사운드기술":
                             temp_dict["사운드기술"] = td[1].text
                         elif th[1].text == "얼굴인식":

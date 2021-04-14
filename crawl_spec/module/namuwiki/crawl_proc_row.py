@@ -3,7 +3,7 @@ import re
 def crawl_proc_row(temp_dict, td): 
     processor = td[1].text
     #temp_dict["프로세서"] = processor
-    
+    next_is_core_clock
     if processor.find("구성 내용 확인") != -1:
         temp_dict["AP종류"] = re.search('.*\[ 구성 내용 확인 \]', processor).group().replace("[ 구성 내용 확인 ]","")
     

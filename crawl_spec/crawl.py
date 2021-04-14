@@ -28,13 +28,13 @@ driver  = webdriver.Chrome(options = chrome_options)
 # driver  = webdriver.Chrome()
 driver.implicitly_wait(3)
 
-df_output = parse_namu(df_input, driver, df_output,0,1)
+df_output = parse_namu(df_input, driver, df_output,0,len(df_input))
 
 #######################크롤링 파트 (세티즌)################################
-df_output = parse_cetizen(df_input, driver, df_output,0,1)
+# df_output = parse_cetizen(df_input, driver, df_output,0,1)
 
 #######################크롤링 파트 (다나와)################################
-df_output = parse_danawa(df_input, driver, df_output, 0,1)
+# df_output = parse_danawa(df_input, driver, df_output, 0,1)
 
 #######################크롤링 데이터 저장################################
 df_output.to_csv("test0414_s.csv", encoding = "utf-8-sig")
