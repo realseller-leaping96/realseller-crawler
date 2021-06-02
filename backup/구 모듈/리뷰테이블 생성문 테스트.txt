@@ -1,0 +1,18 @@
+DROP TABLE IF EXISTS `review_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `review_list` (
+  `review_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pl_id` int(10) unsigned NOT NULL,
+  `pl_model_code` varchar(255) DEFAULT NULL COMMENT '',
+  `pl_name` varchar(255) DEFAULT NULL COMMENT '기',
+  `star` varchar(255) DEFAULT NULL COMMENT '',
+  `market` varchar(255) DEFAULT NULL COMMENT '',
+  `write_id` varchar(255) DEFAULT NULL COMMENT '',
+  `upload_date` varchar(255) DEFAULT NULL COMMENT '',
+  `title` varchar(255) DEFAULT NULL COMMENT '',
+  `content` text DEFAULT NULL COMMENT '리뷰1',
+  `URL` text DEFAULT NULL COMMENT '리뷰1',
+  `valid` varchar(1) DEFAULT NULL COMMENT'',
+  PRIMARY KEY (`review_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
