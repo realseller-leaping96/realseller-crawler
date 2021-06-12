@@ -26,6 +26,7 @@ from module.namuwiki.crawl_proximity_row import crawl_proximity_row
 from module.namuwiki.crawl_satlite_row import crawl_satlite_row
 from module.namuwiki.crawl_size_row import crawl_size_row
 from module.namuwiki.crawl_terminal_row import crawl_terminal_row
+from selenium import webdriver
 
 
 def parse_namu(df_input, driver, df_output, a,b):
@@ -109,8 +110,9 @@ def add(df_input, driver, df_output, a,b):
         temp_dict["제조회사"] = df_input.iloc[index]['pl_maker']
 
         if df_input.iloc[index]['나무링크'] != "":
+            driver  = webdriver.Chrome()
             driver.get(df_input.iloc[index]['나무링크'])
-
+            
             req = driver.page_source
             soup=BeautifulSoup(req, 'html.parser')
 
@@ -167,5 +169,7 @@ def add(df_input, driver, df_output, a,b):
         temp_dict['사이트명'] = "나무위키"
         df_output = df_output.append(pd.DataFrame(temp_dict,index=[0]))
 
+        driver.quit()
+    
     return df_output
 
