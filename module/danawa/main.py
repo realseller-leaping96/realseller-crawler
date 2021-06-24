@@ -572,8 +572,10 @@ def add(df_input, driver, crawl_data, a,b):
 
 def URL(df_input, driver, crawl_data, a,b):
     for index in range(a,b):
+
+
         temp_dict = dict()
-                
+
         temp_dict["모델명"] = df_input.iloc[index]['pl_name']
         temp_dict["모델코드"] = df_input.iloc[index]['pl_model_code']
         temp_dict["제조회사"] = df_input.iloc[index]['pl_maker']
@@ -597,10 +599,34 @@ def URL(df_input, driver, crawl_data, a,b):
                 
                 if hasxpath(driver,'//*[@id="productListArea"]/div[3]/ul/li[1]/div/div[1]/a[1]'):
                     temp_dict["타겟"] = driver.find_element_by_xpath('//*[@id="productListArea"]/div[3]/ul/li[1]/div/div[1]/a[1]').text
-                temp_dict["URL"] = driver.current_url
-                temp_dict["사이트명"] = "다나와"
+                    temp_dict["URL"] = driver.current_url
+                    temp_dict["사이트명"] = "다나와"
+
+                    my_dict = {
+                        #기본정보
+                        "pl_id": df_input.iloc[index]['pl_id'],
+                        "pl_maker": df_input.iloc[index]['pl_maker'],
+                        "pl_model_code": df_input.iloc[index]['pl_model_code'],
+                        "pl_name": df_input.iloc[index]['pl_name'],
+                        "pl_model_name": df_input.iloc[index]['pl_model_name'],
+                        "다나와링크": href,
+                        #"타겟": collet_one(driver,'//*[@id="product_list"]/div/div[3]/div[1]/div[1]/div[1]/a/span',""),
+                    }
                 
-            crawl_data = crawl_data.append(pd.DataFrame(temp_dict,index=[0]))
+                    crawl_data = crawl_data.append(pd.DataFrame(my_dict,index=[0]))
+                else:
+                    my_dict = {
+                        #기본정보
+                        "pl_id": df_input.iloc[index]['pl_id'],
+                        "pl_maker": df_input.iloc[index]['pl_maker'],
+                        "pl_model_code": df_input.iloc[index]['pl_model_code'],
+                        "pl_name": df_input.iloc[index]['pl_name'],
+                        "pl_model_name": df_input.iloc[index]['pl_model_name'],
+                        "다나와링크": None
+                        #"타겟": collet_one(driver,'//*[@id="product_list"]/div/div[3]/div[1]/div[1]/div[1]/a/span',""),
+                    }
+                
+                    crawl_data = crawl_data.append(pd.DataFrame(my_dict,index=[0]))
     return crawl_data
              
      

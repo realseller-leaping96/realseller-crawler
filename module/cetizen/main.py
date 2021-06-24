@@ -340,9 +340,9 @@ def URL(df_input,driver,crawl_data, a,b):
         url1 = "https://review.cetizen.com/review.php?q=phone&just_one=&just_one_name=&just_one_pcat=&keyword_p="
         url2 = "&p_data=3&p_split=&recnum=10"
         driver.get(url1+df_input.iloc[index]['pl_model_code']+url2)
-        print(index,url1+df_input.iloc[index]['pl_model_code']+url2)
+        # print(index,url1+df_input.iloc[index]['pl_model_code']+url2)
         if hasxpath(driver,'//*[@id="product_list"]/div/div[3]/div[1]/div[1]/div/a/span') == True:
-            # driver.find_element_by_xpath('//*[@id="product_list"]/div/div[3]/div[1]/div[1]/div/a/span').click()
+            driver.find_element_by_xpath('//*[@id="product_list"]/div/div[3]/div[1]/div[1]/div/a/span').click()
             driver.implicitly_wait(10)
             
             my_dict = {
@@ -352,14 +352,25 @@ def URL(df_input,driver,crawl_data, a,b):
                 "pl_model_code": df_input.iloc[index]['pl_model_code'],
                 "pl_name": df_input.iloc[index]['pl_name'],
                 "pl_model_name": df_input.iloc[index]['pl_model_name'],
-                "나무링크": "",
                 "세티즌링크": driver.current_url,
-                "다나와링크": "",
-                "타겟": collet_one(driver,'//*[@id="product_list"]/div/div[3]/div[1]/div[1]/div[1]/a/span',""),
+                #"타겟": collet_one(driver,'//*[@id="product_list"]/div/div[3]/div[1]/div[1]/div[1]/a/span',""),
+                
+            }
+            print(driver.current_url)
+            crawl_data = crawl_data.append(pd.DataFrame(my_dict,index=[0]))
+        else:
+            my_dict = {
+                #기본정보
+                "pl_id": df_input.iloc[index]['pl_id'],
+                "pl_maker": df_input.iloc[index]['pl_maker'],
+                "pl_model_code": df_input.iloc[index]['pl_model_code'],
+                "pl_name": df_input.iloc[index]['pl_name'],
+                "pl_model_name": df_input.iloc[index]['pl_model_name'],
+                "세티즌링크": None
+                #"타겟": collet_one(driver,'//*[@id="product_list"]/div/div[3]/div[1]/div[1]/div[1]/a/span',""),
                 
             }
             crawl_data = crawl_data.append(pd.DataFrame(my_dict,index=[0]))
-        else:
             pass
         
     return crawl_data

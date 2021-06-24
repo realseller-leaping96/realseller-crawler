@@ -109,7 +109,7 @@ def add(df_input, driver, df_output, a,b):
         temp_dict["모델코드"] = df_input.iloc[index]['pl_model_code']
         temp_dict["제조회사"] = df_input.iloc[index]['pl_maker']
 
-        if df_input.iloc[index]['나무링크'] != "":
+        if df_input.iloc[index]['나무링크'] != "" and df_input.iloc[index]['나무링크'] != None:
             driver  = webdriver.Chrome()
             driver.get(df_input.iloc[index]['나무링크'])
             
@@ -172,4 +172,39 @@ def add(df_input, driver, df_output, a,b):
         driver.quit()
     
     return df_output
+
+def URL(df_input,driver,crawl_data, a,b):
+    for index in range(a,b):
+        url1 = "https://namu.wiki/Search?q="
+        driver.get(url1+df_input.iloc[index]['pl_model_code'])  
+        if hasxpath(driver,'//*[@id="app"]/div/div[2]/article/div[2]/section/div/h4/a') == True:
+            driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/article/div[2]/section/div/h4/a').click()
+            driver.implicitly_wait(10)
+            
+            my_dict = {
+                #기본정보
+                "pl_id": df_input.iloc[index]['pl_id'],
+                "pl_maker": df_input.iloc[index]['pl_maker'],
+                "pl_model_code": df_input.iloc[index]['pl_model_code'],
+                "pl_name": df_input.iloc[index]['pl_name'],
+                "pl_model_name": df_input.iloc[index]['pl_model_name'],
+                "나무링크": driver.current_url,
+                
+            }
+            print(driver.current_url)
+            crawl_data = crawl_data.append(pd.DataFrame(my_dict,index=[0]))
+        else:
+            my_dict = {
+                #기본정보
+                "pl_id": df_input.iloc[index]['pl_id'],
+                "pl_maker": df_input.iloc[index]['pl_maker'],
+                "pl_model_code": df_input.iloc[index]['pl_model_code'],
+                "pl_name": df_input.iloc[index]['pl_name'],
+                "pl_model_name": df_input.iloc[index]['pl_model_name'],
+                "나무링크": None
+            }
+            crawl_data = crawl_data.append(pd.DataFrame(my_dict,index=[0]))
+            pass
+        
+    return crawl_data
 

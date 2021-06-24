@@ -59,9 +59,9 @@ def parse_naver_shopping(driver,df_input,crawl_data,index,option):
                 "star": star,                       #별점
                 "market": market,                   #구입처(ex 인터파크, 11번가)
                 "write_id": write_id,               #작성자(일부가림처리)
-                "upload_day": upload_day,           #업로드날짜
+                "upload_date": upload_day,           #업로드날짜
                 "title":title,                      #리뷰제목 
-                "text": text,                       #리뷰내용 
+                "content": text,                       #리뷰내용 
                 "URL": driver.current_url
             }
             
