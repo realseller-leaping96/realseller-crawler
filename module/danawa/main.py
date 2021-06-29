@@ -308,7 +308,7 @@ def add(df_input, driver, crawl_data, a,b):
             temp_dict["모델코드"] = df_input.iloc[index]['pl_model_code']
             temp_dict["제조회사"] = df_input.iloc[index]['pl_maker']
             
-            
+            time.sleep(3)
             req = driver.page_source
             soup=BeautifulSoup(req, 'html.parser')
             table = ""
@@ -565,7 +565,8 @@ def add(df_input, driver, crawl_data, a,b):
                             temp_dict["무게"] = td[1].text.replace("무게:","").replace("g","")
 
                     
-            temp_dict["타겟제품"] = driver.find_element_by_xpath('//*[@id="blog_content"]/div[2]/div[1]/h3').text
+            #temp_dict["타겟제품"] = driver.find_element_by_xpath('//*[@id="blog_content"]/div[2]/div[1]/h3').text
+            temp_dict["타겟제품"] = "미사용"
             temp_dict["사이트명"] = "다나와"
             crawl_data = crawl_data.append(pd.DataFrame(temp_dict,index=[0]))
     return crawl_data

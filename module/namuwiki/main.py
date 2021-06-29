@@ -117,57 +117,57 @@ def add(df_input, driver, df_output, a,b):
             soup=BeautifulSoup(req, 'html.parser')
 
             table = select_table(soup)
+            if table != "":
+                trs = table.select("tr")
+                next_is_core_clock = 0
+                for tr in trs:
+                    td = tr.select("td")
+                    if len(td) <= 0:
+                        continue
                 
-            trs = table.select("tr")
-            next_is_core_clock = 0
-            for tr in trs:
-                td = tr.select("td")
-                if len(td) <= 0:
-                    continue
-            
-                if td[0].text == "프로세서" and "AP종류" not in temp_dict:
-                    temp_dict = crawl_proc_row(temp_dict, td)
+                    if td[0].text == "프로세서" and "AP종류" not in temp_dict:
+                        temp_dict = crawl_proc_row(temp_dict, td)
 
-                elif td[0].text == "메모리" and "시스템램" not in temp_dict:
-                    temp_dict = crawl_mem_row(temp_dict, td)
-                        
-                elif td[0].text == "디스플레이" and "화면비" not in temp_dict:
-                    temp_dict = crawl_disp_row(temp_dict, td)
+                    elif td[0].text == "메모리" and "시스템램" not in temp_dict:
+                        temp_dict = crawl_mem_row(temp_dict, td)
+                            
+                    elif td[0].text == "디스플레이" and "화면비" not in temp_dict:
+                        temp_dict = crawl_disp_row(temp_dict, td)
 
-                elif td[0].text == "네트워크" and "5G" not in temp_dict:
-                    temp_dict = crawl_network_row(temp_dict, td) 
-                        
-                elif td[0].text == "근접통신" and "블루투스" not in temp_dict:
-                    temp_dict = crawl_proximity_row(temp_dict, td)
+                    elif td[0].text == "네트워크" and "5G" not in temp_dict:
+                        temp_dict = crawl_network_row(temp_dict, td) 
+                            
+                    elif td[0].text == "근접통신" and "블루투스" not in temp_dict:
+                        temp_dict = crawl_proximity_row(temp_dict, td)
 
-                elif td[0].text == "위성항법" and "위성항법" not in temp_dict:
-                    temp_dict = crawl_satlite_row(temp_dict, td)
-                
-                elif td[0].text == "카메라" and "전면카메라" not in temp_dict:
-                    temp_dict = crawl_camera_row(temp_dict,td)
+                    elif td[0].text == "위성항법" and "위성항법" not in temp_dict:
+                        temp_dict = crawl_satlite_row(temp_dict, td)
                     
-                elif td[0].text == "배터리" and "배터리용량" not in temp_dict:
-                    temp_dict = crawl_battery_row(temp_dict,td)
+                    elif td[0].text == "카메라" and "전면카메라" not in temp_dict:
+                        temp_dict = crawl_camera_row(temp_dict,td)
+                        
+                    elif td[0].text == "배터리" and "배터리용량" not in temp_dict:
+                        temp_dict = crawl_battery_row(temp_dict,td)
+                
+                    elif td[0].text == "운영체제" and "운영체제" not in temp_dict:
+                        temp_dict = crawl_os_row(temp_dict, td)
+                
+                    elif td[0].text == "규격" :
+                        temp_dict = crawl_size_row(temp_dict, td)
+                
+                    elif td[0].text.find("색상") != -1 and "색상" not in temp_dict :
+                        temp_dict = crawl_color_row(temp_dict, td)
+                
+                    elif td[0].text == "단자정보" and "충전단자" not in temp_dict :
+                        temp_dict = crawl_terminal_row(temp_dict, td)
             
-                elif td[0].text == "운영체제" and "운영체제" not in temp_dict:
-                    temp_dict = crawl_os_row(temp_dict, td)
-            
-                elif td[0].text == "규격" :
-                    temp_dict = crawl_size_row(temp_dict, td)
-            
-                elif td[0].text.find("색상") != -1 and "색상" not in temp_dict :
-                    temp_dict = crawl_color_row(temp_dict, td)
-            
-                elif td[0].text == "단자정보" and "충전단자" not in temp_dict :
-                    temp_dict = crawl_terminal_row(temp_dict, td)
-        
-                elif td[0].text == "생체인식":
-                    temp_dict = crawl_biometrics_row(temp_dict,td)
-            
-                elif td[0].text == "기타":
-                    temp_dict = crawl_etc_row(temp_dict, td)
-        temp_dict['사이트명'] = "나무위키"
-        df_output = df_output.append(pd.DataFrame(temp_dict,index=[0]))
+                    elif td[0].text == "생체인식":
+                        temp_dict = crawl_biometrics_row(temp_dict,td)
+                
+                    elif td[0].text == "기타":
+                        temp_dict = crawl_etc_row(temp_dict, td)
+                temp_dict['사이트명'] = "나무위키"
+                df_output = df_output.append(pd.DataFrame(temp_dict,index=[0]))
 
         driver.quit()
     
@@ -175,6 +175,7 @@ def add(df_input, driver, df_output, a,b):
 
 def URL(df_input,driver,crawl_data, a,b):
     for index in range(a,b):
+        driver  = webdriver.Chrome()
         url1 = "https://namu.wiki/Search?q="
         driver.get(url1+df_input.iloc[index]['pl_model_code'])  
         if hasxpath(driver,'//*[@id="app"]/div/div[2]/article/div[2]/section/div/h4/a') == True:
@@ -205,6 +206,7 @@ def URL(df_input,driver,crawl_data, a,b):
             }
             crawl_data = crawl_data.append(pd.DataFrame(my_dict,index=[0]))
             pass
+        driver.quit()
         
     return crawl_data
 

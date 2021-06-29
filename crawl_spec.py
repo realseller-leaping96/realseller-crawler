@@ -75,6 +75,9 @@ finally:
 
 df_OUTER_JOIN.to_sql(name='URL_list', con=engine, if_exists='append', index=False)
 
+print("url_list 테이블에 빈값 있을경우 수기로 채우고 진행할것")
+input()
+
 #############################################################################
 #               스펙 크롤링 코드                                           #
 #   입력:url_list 테이블 / 출력:g5_phone_spec_cetizen,danawa,namu 테이블  #
