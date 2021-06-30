@@ -1,6 +1,8 @@
-string = 'test test test'
+a = 32
+b = 9
 
-if '아이폰11' in '애플아이폰1164GB공기계(중고) ':
-    print (string)
+import math
 
+c = math.gcd(a,b)
 
+print(a/c,b/c)

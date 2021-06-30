@@ -2,12 +2,14 @@
 #           상세스펙 통합테이블 백업코드    #
 #        phone_spec_test 테이블             #
 #############################################
+import math
 import pymysql
 import pandas as pd
 from sqlalchemy import create_engine
 pymysql.install_as_MySQLdb()
 import MySQLdb
 import re
+import module.spec_integration.phone_spec
 
 #############################
 # 새로 추가된 기종 갯수
@@ -38,6 +40,7 @@ for i in range(num-new,num):
         price = phone_list.iloc[i]['pl_price']
         
         # 통신규격
+        # 5G/4G 기재된거중에 높은 통신규격
         communication_standard = ""
         if len(cetizen_row) == 1:
             if cetizen_row.iloc[0]['sc_5g'] is not None:
@@ -56,6 +59,7 @@ for i in range(num-new,num):
                 communication_standard = '4G'
 
         #운영체제
+        # 안드로이드, iOS 중 최신버전만 남기기 (UI, 삼성,LG,옵티머스등 자체추가OS는 생략)
         os = ""
         if len(cetizen_row) == 1:
             if cetizen_row.iloc[0]['sc_os'] is not None:
@@ -100,6 +104,7 @@ for i in range(num-new,num):
                 display_in = namu_row.iloc[0]['sn_display_in']
                 
         #화면센치
+        #화면인치를 비율로 계산
         display_cm = ""
         if display_in != "" and display_in is not None:
             display_cm = round(float(display_in)*2.54,2)
@@ -110,10 +115,10 @@ for i in range(num-new,num):
         if len(cetizen_row) == 1:
             if cetizen_row.iloc[0]['sc_display_resolution'] is not None:
                 display_resolution = cetizen_row.iloc[0]['sc_display_resolution']
-                resolution_list = display_resolution.split("x")
-                width = resolution_list[0]
-                height = resolution_list[1]
-                display_resolution = height+"x"+width
+                # resolution_list = display_resolution.split("x")
+                # width = resolution_list[0]
+                # height = resolution_list[1]
+                # display_resolution = height+"x"+width
                 
         if len(danawa_row) == 1 and display_resolution == "":
             if danawa_row.iloc[0]['sd_display_resolution'] is not None:
@@ -122,10 +127,18 @@ for i in range(num-new,num):
         if len(namu_row) == 1 and display_resolution == "":
             if namu_row.iloc[0]['sn_display_resolution'] is not None:
                 display_resolution = namu_row.iloc[0]['sn_display_resolution'].replace(" ","")
-        display_resolution = display_resolution.strip().replace("480x800","800x480")
+
+        # display_resolution = display_resolution.strip().replace("480x800","800x480")
+
         # "x"를 기준으로 split해서 둘중에 큰값/작은값 비교해서 재구성 
+        resolution_list = display_resolution.split("x")
+        width = resolution_list[0]
+        height = resolution_list[1]
+        display_resolution = height+"x"+width
+        
         
         #패널종류
+        #S- / P- / D- 수식어 앞에다 붙이는 방식으로 통일
         display_type = ""
         if len(cetizen_row) == 1:
             if cetizen_row.iloc[0]['sc_display_type'] is not None:
@@ -167,8 +180,8 @@ for i in range(num-new,num):
 
         if len(namu_row) == 1 and display_aspect_ratio == "":
             if namu_row.iloc[0]['sn_display_aspect_ratio'] is not None:
-                display_aspect_ratio = namu_row.iloc[0]['sn_display_aspect_ratio']
-        
+                display_aspect_ratio = namu_row.iloc[0]['sn_display_aspect_ratio']    
+
         #비율 계산하는식/공식 반영?
         #함수화 => 정수x정수가 들어가면 비율값이 나오도록 하는
         if  display_resolution == "1792x828": 
@@ -187,6 +200,18 @@ for i in range(num-new,num):
             display_aspect_ratio = "16:9"
         elif  display_resolution == "1136x640":
             display_aspect_ratio = "16:9"
+
+        if display_aspect_ratio == "":
+            resolution_list = display_resolution.split("x")
+            width = resolution_list[0]
+            height = resolution_list[1]
+            gcd = math.gcd(width,height)
+            a = round(height/gcd)
+            b = round(width/gcd)
+            if max(a,b) > 16:
+                a = a/2
+                b = b/2
+            display_aspect_ratio = str(a)+":"+str(b)
             
         #AP 종류
         ap_type = ""
