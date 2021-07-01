@@ -9,7 +9,11 @@ from sqlalchemy import create_engine
 pymysql.install_as_MySQLdb()
 import MySQLdb
 import re
-import module.spec_integration.phone_spec
+import numpy as np
+from module.spec_integration.comunication_standard import find_comm_stand
+from module.spec_integration.operation_system import find_os
+
+
 
 #############################
 # 새로 추가된 기종 갯수
@@ -39,55 +43,11 @@ for i in range(num-new,num):
         maker = phone_list.iloc[i]['pl_maker']
         price = phone_list.iloc[i]['pl_price']
         
-        # 통신규격
-        # 5G/4G 기재된거중에 높은 통신규격
-        communication_standard = ""
-        if len(cetizen_row) == 1:
-            if cetizen_row.iloc[0]['sc_5g'] is not None:
-                communication_standard = '5G'
-            elif cetizen_row.iloc[0]['sc_4g'] is not None:
-                communication_standard = '4G'
-        if len(danawa_row) == 1 and communication_standard == "":
-            if danawa_row.iloc[0]['sd_5g'] is not None:
-                communication_standard = '5G'
-            elif danawa_row.iloc[0]['sd_4g'] is not None:
-                communication_standard = '4G'
-        if len(namu_row) == 1 and communication_standard == "":
-            if namu_row.iloc[0]['sn_5g'] is not None:
-                communication_standard = '5G'
-            elif namu_row.iloc[0]['sn_4g'] is not None:
-                communication_standard = '4G'
+        #통신규격
+        communication_standard = find_comm_stand(cetizen_row,danawa_row,namu_row)
 
         #운영체제
-        # 안드로이드, iOS 중 최신버전만 남기기 (UI, 삼성,LG,옵티머스등 자체추가OS는 생략)
-        os = ""
-        if len(cetizen_row) == 1:
-            if cetizen_row.iloc[0]['sc_os'] is not None:
-                os = re.sub(('삼성.*|옵티머스.*'),"",cetizen_row.iloc[0]['sc_os'])
-                os_split = os.split("|")
-                os_split = re.search('[0-9.]+',os_split[-1]).group()
-                if os.find("iOS") != -1:
-                    os = 'iOS ' +  os_split
-                elif os.find("안드로이드") != -1:
-                    os = 'Android ' +  os_split
-        if len(danawa_row) == 1 and os == "":
-            if danawa_row.iloc[0]['sd_os'] is not None:
-                os = danawa_row.iloc[0]['sd_os']
-                os_split = os.split("|")
-                os_split = re.search('[0-9.]+',os_split[-1]).group()
-                if os.find("iOS") != -1:
-                    os = 'iOS ' +  os_split
-                elif os.find("안드로이드") != -1:
-                    os = 'Android ' +  os_split
-        if len(namu_row) == 1 and os == "":
-            if namu_row.iloc[0]['sn_os'] is not None:
-                os = re.sub(('삼성.*|옵티머스.*|Samsung.*|LG.*'),"",namu_row.iloc[0]['sn_os'])
-                os_split = os.split("|")
-                os_split = re.search('[0-9.]+',os_split[-1]).group()
-                if os.find("iOS") != -1:
-                    os = 'iOS ' +  os_split
-                elif os.find("안드로이드") != -1:
-                    os = 'Android ' +  os_split
+        os = find_os(cetizen_row,danawa_row,namu_row)
                     
         #화면인치
         display_in = ""
@@ -677,5 +637,5 @@ for i in range(num-new,num):
 engine = create_engine("mysql+mysqldb://root:"+"123123"+"@localhost/gidseller", encoding='utf-8')
 conn = engine.connect()
 pst = len(phone_spec_test)
-phone_spec_test.replace("",None,inplace=True)
+phone_spec_test.replace("",np.NaN,inplace=True)
 phone_spec_test.iloc[pst-new:pst].to_sql(name='phone_spec', con=engine, if_exists='append', index=False)
