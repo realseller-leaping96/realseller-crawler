@@ -179,8 +179,7 @@ def URL(df_input,driver,crawl_data, a,b):
         url1 = "https://namu.wiki/Search?q="
         driver.get(url1+df_input.iloc[index]['pl_model_code'])  
         if hasxpath(driver,'//*[@id="app"]/div/div[2]/article/div[2]/section/div/h4/a') == True:
-            driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/article/div[2]/section/div/h4/a').click()
-            driver.implicitly_wait(10)
+            link = driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/article/div[2]/section/div/h4/a')
             
             my_dict = {
                 #기본정보
@@ -189,7 +188,7 @@ def URL(df_input,driver,crawl_data, a,b):
                 "pl_model_code": df_input.iloc[index]['pl_model_code'],
                 "pl_name": df_input.iloc[index]['pl_name'],
                 "pl_model_name": df_input.iloc[index]['pl_model_name'],
-                "나무링크": driver.current_url,
+                "나무링크": link.get_attribute('href')
                 
             }
             print(driver.current_url)

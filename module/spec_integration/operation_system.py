@@ -1,3 +1,5 @@
+import re
+
 def find_os(cetizen_row,danawa_row,namu_row):
     #운영체제
     # 안드로이드, iOS 중 최신버전만 남기기 (UI, 삼성,LG,옵티머스등 자체추가OS는 생략)

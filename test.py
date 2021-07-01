@@ -1,8 +1,5 @@
-a = 32
-b = 9
+import re
 
-import math
-
-c = math.gcd(a,b)
-
-print(a/c,b/c)
+text = "I like apble And abple"
+text_mod = re.sub('apble|abple',"apple",text)
+print (text_mod)
