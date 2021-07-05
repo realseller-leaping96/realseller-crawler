@@ -90,9 +90,9 @@ def parse_11_signup(driver,df_input,crawl_data,index,option):
                 "star": star.replace("판매자 평점 별5개 중 ","").replace("개",""),              #별점
                 "market": "11번가",                                                          #구입처(ex 인터파크, 11번가)
                 "write_id": review.find('strong', {'class': 'name'}).text,                   #작성자(일부가림처리)
-                "upload_day": review.find('span', {'class': 'date'}).text,                   #업로드날짜
+                "upload_date": review.find('span', {'class': 'date'}).text,                   #업로드날짜
             
-                "text": review.find('span', {'class': 'summ_conts'}).text,                   #리뷰내용 
+                "content": review.find('span', {'class': 'summ_conts'}).text,                   #리뷰내용 
 
                 "URL":driver.current_url
             }

@@ -17,6 +17,7 @@ from module.st11_signup import parse_11_signup # 11번가 완납가입 리뷰크
 from module.naver_shopping import parse_naver_shopping #네이버쇼핑 리뷰크롤러
 import pandas as pd
 import numpy as np
+from datetime import datetime
 
 engine = create_engine("mysql+mysqldb://root:"+"123123"+"@localhost/gidseller", encoding='utf-8')
 conn = engine.connect()
@@ -47,38 +48,26 @@ chrome_options.add_argument("--headless")
 driver  = webdriver.Chrome()
 driver.implicitly_wait(3)
 
-num = len(df_input)
-# num = 10
+# num = len(df_input)
+num = 2
 #11번가- 중고
 for i in range(0,num):
     crawl_data = crawl_data.append(parse_11_entique(driver,df_input,crawl_data_none,i,""))
     print(i)
-
-#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중
-crawl_data.to_csv("test_r.csv", encoding = "utf-8-sig")
-#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중
 
 #11번가- 완납가입
 for i in range(0,num):
     crawl_data = crawl_data.append(parse_11_signup(driver,df_input,crawl_data_none,i,""))
     print(i)
 
-#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중
-crawl_data.to_csv("test_r.csv", encoding = "utf-8-sig")
-#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중
-
 #네이버쇼핑
 for i in range(0,num):
     if i % 3 == 0 and i != 0:        
         driver.quit()
         driver  = webdriver.Chrome()
-    #crawl_data.to_csv("test_r.csv", encoding = "utf-8-sig") => 네이버쇼핑은 크롤링감지시 막으므로 중간에 백업
     print(i)
     crawl_data = crawl_data.append(parse_naver_shopping(driver,df_input,crawl_data_none,i,"all"))
     
-#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중
-crawl_data.to_csv("test_r.csv", encoding = "utf-8-sig")
-#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중
 
 ###############################
 #         백업코드            #
@@ -124,11 +113,8 @@ try:
     crawl_data = crawl_data.drop(['pl_id'], axis='columns')
 
     crawl_data['pr_valid'] = ''
-    #테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중
-    crawl_data.to_csv("test_r.csv", encoding = "utf-8-sig")
-    #테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중#테스트중
-    crawl_data = crawl_data.drop(['upload_day'],axis=1)
-    crawl_data = crawl_data.drop(['text'],axis=1)
+    today = datetime.today()
+    crawl_data.to_csv(str(today.year) +"-"+ str(today.month) +"-"+ str(today.day)+"_review.csv", encoding = "utf-8-sig")
     crawl_data.columns = ['pr_model_code', 'pr_model_name','pr_star','pr_market','pr_write_id','pr_upload_date','pr_title','pr_text','pr_url','pr_valid']
     
     
@@ -158,41 +144,45 @@ try:
         text_column.append(cont)
     crawl_data["pr_text"] = text_column
 
-    ##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중
     crawl_data.to_sql(name='g5_phone_review', con=engine, if_exists='append', index=False)
-    crawl_data.to_csv("test_r.csv", encoding = "utf-8-sig")
-    ##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중##테스트중
 
-    #중복삭제
-    with connection.cursor() as cursor:
-        sql1 = """
-        DELETE r2 FROM g5_phone_review r1, g5_phone_review r2 WHERE r1.pr_id <> r2.pr_id AND r1.pr_text = r2.pr_text
-        """
-        cursor.execute(sql1)
-    connection.commit()
+    #중복삭제 후 pk 새로부여
+    df_input = pd.read_sql_table('g5_phone_review',conn)
+    conn.close()
+    duplicateDFRow = df_input[df_input.duplicated('pr_text',keep='last')]
+    if len(duplicateDFRow) > 0:
+      del_list = duplicateDFRow['pr_id']
+      with connection.cursor() as cursor:
+            for d in del_list:
+                  sql = "delete from g5_phone_review where pr_id=%s"
+                  cursor.execute(sql, d)
+                  connection.commit()
+            
+            sql2_1= """
+            ALTER TABLE g5_phone_review AUTO_INCREMENT = 1;
+            """
+            cursor.execute(sql2_1)
+            connection.commit()
 
-    #pk 새로부여
-    with connection.cursor() as cursor:
-        
-        sql2_1= """
-        ALTER TABLE g5_phone_review AUTO_INCREMENT = 1;
-        """
-        cursor.execute(sql2_1)
-    connection.commit()
+            sql2_2="""
+            SET @COUNT = 0;
+            """
+            cursor.execute(sql2_2)
+            connection.commit()
 
-    with connection.cursor() as cursor:
-        sql2_2="""
-        SET @COUNT = 0;
-        """
-        cursor.execute(sql2_2)
-    connection.commit()
+            sql2_3="""
+            UPDATE g5_phone_review SET pr_id = @COUNT:=@COUNT+1;
+            """
+            cursor.execute(sql2_3)
+            connection.commit()
+    # with connection.cursor() as cursor:
+    #     sql1 = """
+    #     DELETE r2 FROM g5_phone_review r1, g5_phone_review r2 WHERE r1.pr_id <> r2.pr_id AND r1.pr_text = r2.pr_text
+    #     """
+    #     cursor.execute(sql1)
+    # connection.commit()
 
-    with connection.cursor() as cursor:
-        sql2_3="""
-        UPDATE g5_phone_review SET pr_id = @COUNT:=@COUNT+1;
-        """
-        cursor.execute(sql2_3)
-    connection.commit()
+
 
 
 finally:
