@@ -53,7 +53,7 @@ df_OUTER_JOIN.dropna(subset=['pl_maker'], inplace=True)
 connection = pymysql.connect(host='localhost', user='root', password='123123', db='gidseller')
 try:
     with connection.cursor() as cursor:
-        sql =( "CREATE TABLE if not exists `URL_list` (`url_id` INT(11) NOT NULL AUTO_INCREMENT,"+
+        sql =( "CREATE TABLE if not exists `url_list` (`url_id` INT(11) NOT NULL AUTO_INCREMENT,"+
               "`pl_maker` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',"+
               "`pl_model_code` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',"+
               "`pl_name` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',"+
@@ -73,7 +73,7 @@ finally:
     connection.close()
 
 
-df_OUTER_JOIN.to_sql(name='URL_list', con=engine, if_exists='append', index=False)
+df_OUTER_JOIN.to_sql(name='url_list', con=engine, if_exists='append', index=False)
 
 print("url_list 테이블에 빈값 있을경우 수기로 채우고 진행할것")
 input()
