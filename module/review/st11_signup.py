@@ -68,7 +68,11 @@ def parse_11_signup(driver,df_input,crawl_data,index,option):
 
     link_list = link_list[0:3]
     for link in link_list:
-        driver.get(link.get('href'))
+        if link.get('href')[0] == "/":
+            link_href = "https:" + link.get('href')
+            driver.get(link_href)
+        else:
+            driver.get(link.get('href'))
         driver.find_element_by_xpath('//*[@id="reviewLi"]/a')
         req = driver.page_source
         soup=BeautifulSoup(req, 'html.parser')

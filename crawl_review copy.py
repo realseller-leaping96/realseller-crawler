@@ -18,13 +18,19 @@ from module.review.naver_shopping import parse_naver_shopping #네이버쇼핑 �
 import pandas as pd
 import numpy as np
 from datetime import datetime
+from pyvirtualdisplay import Display 
+
+####################################초기화#################################################
+path = ''# 여기에다 리눅스에서 크롬드라이버 있는경로 지정
+display = Display(visible=0, size=(1920, 1080)) 
+display.start()
 
 engine = create_engine("mysql+mysqldb://root:"+"123123"+"@localhost/gidseller", encoding='utf-8')
 conn = engine.connect()
 df_input = pd.read_sql_table('g5_phone_list',conn)
 
+my_dict = { #리뷰크롤링에 사용할 데이터 형식
 
-my_dict = {
     "pl_id": "",                      #스펙테이블 아이디
     "pl_model_code": "",              #모델코드
     "pl_name": "",                    #모델영문명
@@ -39,16 +45,11 @@ my_dict = {
 
 crawl_data = pd.DataFrame(my_dict,index=[0])
 crawl_data_none = pd.DataFrame(my_dict,index=[0])
-
-
-chrome_options = Options()
-chrome_options.add_experimental_option("detach", True)
-chrome_options.add_argument("--headless")
-# driver  = webdriver.Chrome(options = chrome_options)
 driver  = webdriver.Chrome()
 driver.implicitly_wait(3)
+####################################초기화#################################################
 
-# num = len(df_input)
+
 num = 2
 #11번가- 중고
 for i in range(0,num):
@@ -74,7 +75,6 @@ for i in range(0,num):
 #    g5_phone_review 테이블   #
 ###############################
 
-#a = pd.read_csv("test_r.csv")
 crawl_data.dropna(subset=['URL'], inplace=True)
 
 connection = pymysql.connect(host='localhost', user='root', password='123123', db='gidseller')
@@ -108,6 +108,8 @@ try:
     connection.commit()
     
     #내DB에 백업
+    # engine = create_engine("mysql+mysqldb://root:"+"123123"+"@localhost/gidseller", encoding='utf-8')
+    # conn = engine.connect()
     crawl_data = crawl_data.drop(['pl_id'], axis='columns')
 
     crawl_data['pr_valid'] = ''
