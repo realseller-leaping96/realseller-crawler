@@ -7,10 +7,10 @@ from bs4 import BeautifulSoup
 import time
 import re
 import os
-from module.namuwiki.detail_df_init import df_init #출력할 데이터 프레임 형식 정의 =>  DataFrame 리턴
-from module.cetizen import main as cetizen # 세티즌 스펙크롤러
-from module.namuwiki import main as namu # 나무위키 스페크롤러
-from module.danawa import main as danawa # 다나와 스펙크롤러
+from module.spec.namuwiki.detail_df_init import df_init #출력할 데이터 프레임 형식 정의 =>  DataFrame 리턴
+from module.spec.cetizen import main as cetizen # 세티즌 스펙크롤러
+from module.spec.namuwiki import main as namu # 나무위키 스페크롤러
+from module.spec.danawa import main as danawa # 다나와 스펙크롤러
 from sqlalchemy import create_engine
 import pymysql
 pymysql.install_as_MySQLdb()
@@ -23,8 +23,8 @@ from pyvirtualdisplay import Display
 
 ####################################초기화#################################################
 path = ''# 여기에다 리눅스에서 크롬드라이버 있는경로 지정
-display = Display(visible=0, size=(1920, 1080)) 
-display.start()
+# display = Display(visible=0, size=(1920, 1080)) 
+# display.start()
 
 ######################################################################################
 ################## 새롭게 추가된 기종의 갯수 입력 ####################################
