@@ -9,23 +9,23 @@ import os
 #######################내가 정의한 모듈##############################################
 
 
-from module.namuwiki.checking import hasxpath #해당되는 xpath 요소 존재여부 확인하는 함수 => True/False로 리턴
-from module.namuwiki.select_table import select_table #사양테이블 선택
+from module.spec.namuwiki.checking import hasxpath #해당되는 xpath 요소 존재여부 확인하는 함수 => True/False로 리턴
+from module.spec.namuwiki.select_table import select_table #사양테이블 선택
 
-from module.namuwiki.crawl_battery_row import crawl_battery_row
-from module.namuwiki.crawl_biometrics_row import crawl_biometrics_row
-from module.namuwiki.crawl_camera_row import crawl_camera_row
-from module.namuwiki.crawl_color_row import crawl_color_row
-from module.namuwiki.crawl_disp_row import crawl_disp_row
-from module.namuwiki.crawl_etc_row import crawl_etc_row
-from module.namuwiki.crawl_mem_row import crawl_mem_row
-from module.namuwiki.crawl_network_row import crawl_network_row
-from module.namuwiki.crawl_os_row import crawl_os_row
-from module.namuwiki.crawl_proc_row import crawl_proc_row
-from module.namuwiki.crawl_proximity_row import crawl_proximity_row
-from module.namuwiki.crawl_satlite_row import crawl_satlite_row
-from module.namuwiki.crawl_size_row import crawl_size_row
-from module.namuwiki.crawl_terminal_row import crawl_terminal_row
+from module.spec.namuwiki.crawl_battery_row import crawl_battery_row
+from module.spec.namuwiki.crawl_biometrics_row import crawl_biometrics_row
+from module.spec.namuwiki.crawl_camera_row import crawl_camera_row
+from module.spec.namuwiki.crawl_color_row import crawl_color_row
+from module.spec.namuwiki.crawl_disp_row import crawl_disp_row
+from module.spec.namuwiki.crawl_etc_row import crawl_etc_row
+from module.spec.namuwiki.crawl_mem_row import crawl_mem_row
+from module.spec.namuwiki.crawl_network_row import crawl_network_row
+from module.spec.namuwiki.crawl_os_row import crawl_os_row
+from module.spec.namuwiki.crawl_proc_row import crawl_proc_row
+from module.spec.namuwiki.crawl_proximity_row import crawl_proximity_row
+from module.spec.namuwiki.crawl_satlite_row import crawl_satlite_row
+from module.spec.namuwiki.crawl_size_row import crawl_size_row
+from module.spec.namuwiki.crawl_terminal_row import crawl_terminal_row
 from selenium import webdriver
 
 

@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import time
 import re
 import os
-from module.namuwiki.detail_df_init import df_init #출력할 데이터 프레임 형식 정의 =>  DataFrame 리턴
+from module.spec.namuwiki.detail_df_init import df_init #출력할 데이터 프레임 형식 정의 =>  DataFrame 리턴
 from sqlalchemy import create_engine
 import pymysql
 pymysql.install_as_MySQLdb()

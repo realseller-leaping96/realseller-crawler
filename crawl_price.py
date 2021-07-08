@@ -1,21 +1,11 @@
 import pandas as pd
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from bs4 import BeautifulSoup
-import time
-import re
-import os
-from module.namuwiki.detail_df_init import df_init #출력할 데이터 프레임 형식 정의 =>  DataFrame 리턴
 from sqlalchemy import create_engine
 import pymysql
 pymysql.install_as_MySQLdb()
-from selenium.webdriver.chrome.options import Options
 import MySQLdb
-import time
 from module.price.cetizen_cal import parse_by_telecom_maker #세티즌 가격크롤러
 import pandas as pd
-import numpy as np
-
 #########################################
 # 세티즌 가격계산기 크롤링 #
 #########################################
