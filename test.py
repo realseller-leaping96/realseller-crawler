@@ -1,1 +1,22 @@
-print("나는 빡빡이다")
+sn_columns = ["sn_model_name","sn_model_code",
+"sn_maker","sn_release_date","sn_os","sn_sale_type",
+"sn_display_cm","sn_display_in","sn_display_type",
+"sn_display_resolution","sn_display_ppi","sn_display_hz",
+"sn_display_aspect_ratio","sn_display_size","sn_display_width",
+"sn_display_height","sn_display_hdr","sn_ap_type","sn_core",
+"sn_core_clock","sn_gpu_core","sn_npu_dsp","sn_sensor_hub",
+"sn_modem","sn_ram","sn_Builtin_memory","sn_storage",
+"sn_external_memory","sn_5g","sn_4g","sn_wifi","sn_bluetooth",
+"sn_satellite","sn_usim_type","sn_dual_usim","sn_camera_type",
+"sn_back_camera","sn_front_camera","sn_camera_resolution",
+"sn_flash","sn_photo_resolution","sn_front_resolution","sn_front_video_resolution",
+"sn_camera_aperture","sn_hand_tremor_correction","sn_hand_tremor_protection",
+"sn_camera_flash","sn_hdr_filming","sn_auto_hdr","sn_optical_zoom","sn_geotag",
+"sn_laser_auto_focus","sn_auto_focus","sn_out_focus","sn_touch_focus","sn_panorama",
+"sn_tof","sn_night_photography","sn_iphone_terminal","sn_speaker","sn_high_sound_quality",
+"sn_sound_technology","sn_fingerprint","sn_face","sn_iris","sn_voice","sn_ai","sn_payment",
+"sn_touch_pen","sn_dustproof","sn_etc","sn_charging_terminal","sn_battery","sn_battery_type1",
+"sn_battery_type2","sn_battery_type3","sn_battery_terminal","sn_fast_charge","sn_wireless_charge",
+"sn_color","sn_width","sn_height","sn_thickness","sn_weight"]
+
+print(sn_columns)

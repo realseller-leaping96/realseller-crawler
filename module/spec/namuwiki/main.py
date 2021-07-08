@@ -1,17 +1,9 @@
 import pandas as pd
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
-import time
-import re
-import os
-
-#######################내가 정의한 모듈##############################################
-
+import chrome_driver_module #크롬드라이버 연결 정의모듈 (버전,경로 로컬환경따라 다름)
 
 from module.spec.namuwiki.checking import hasxpath #해당되는 xpath 요소 존재여부 확인하는 함수 => True/False로 리턴
 from module.spec.namuwiki.select_table import select_table #사양테이블 선택
-
 from module.spec.namuwiki.crawl_battery_row import crawl_battery_row
 from module.spec.namuwiki.crawl_biometrics_row import crawl_biometrics_row
 from module.spec.namuwiki.crawl_camera_row import crawl_camera_row
@@ -26,7 +18,6 @@ from module.spec.namuwiki.crawl_proximity_row import crawl_proximity_row
 from module.spec.namuwiki.crawl_satlite_row import crawl_satlite_row
 from module.spec.namuwiki.crawl_size_row import crawl_size_row
 from module.spec.namuwiki.crawl_terminal_row import crawl_terminal_row
-from selenium import webdriver
 
 
 def parse_namu(df_input, driver, df_output, a,b):
@@ -110,7 +101,7 @@ def add(df_input, driver, df_output, a,b):
         temp_dict["제조회사"] = df_input.iloc[index]['pl_maker']
 
         if df_input.iloc[index]['나무링크'] != "" and df_input.iloc[index]['나무링크'] != None:
-            driver  = webdriver.Chrome()
+            driver = chrome_driver_module.ChromeDriver().driver
             driver.get(df_input.iloc[index]['나무링크'])
             
             req = driver.page_source
@@ -175,7 +166,7 @@ def add(df_input, driver, df_output, a,b):
 
 def URL(df_input,driver,crawl_data, a,b):
     for index in range(a,b):
-        driver  = webdriver.Chrome()
+        driver = chrome_driver_module.ChromeDriver().driver
         url1 = "https://namu.wiki/Search?q="
         driver.get(url1+df_input.iloc[index]['pl_model_code'])  
         if hasxpath(driver,'//*[@id="app"]/div/div[2]/article/div[2]/section/div/h4/a') == True:

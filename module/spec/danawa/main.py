@@ -1,10 +1,8 @@
 import pandas as pd
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import time
 import re
-import os
+import chrome_driver_module #크롬드라이버 연결 정의모듈 (버전,경로 로컬환경따라 다름)
 
 def hasxpath(driver,xpath):
     try:
@@ -299,6 +297,7 @@ def add(df_input, driver, crawl_data, a,b):
         
         if df_input.iloc[index]['다나와링크'] != "":
             driver.get(df_input.iloc[index]['다나와링크'])
+            time.sleep(1)
             print(index,  df_input.iloc[index]['다나와링크'] )
             
             
@@ -585,6 +584,7 @@ def URL(df_input, driver, crawl_data, a,b):
         url1 = "http://search.danawa.com/dsearch.php?query="
         url2 = "&cate_c1=224&cate_c2=48419&volumeType=allvs&page=1&limit=40&sort=saveDESC&list=list&boost=true&addDelivery=N&recommendedSort=Y&defaultUICategoryCode=122514&defaultPhysicsCategoryCode=224%7C48419%7C48766%7C0&defaultVmTab=1363&defaultVaTab=1401402&tab=main"
         driver.get(url1+df_input.iloc[index]['pl_name']+url2)
+        time.sleep(3)
         if hasxpath(driver,'//*[@id="productListArea"]/div[3]/ul/li[1]/div/div[1]/a[1]') == True:
             
             href = driver.find_element_by_xpath('//*[@id="productListArea"]/div[3]/ul/li[1]/div/div[1]/a[1]').get_attribute("href")

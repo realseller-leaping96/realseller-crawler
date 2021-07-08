@@ -2,13 +2,7 @@
 #           상세스펙 통합테이블 백업코드    #
 #        phone_spec_test 테이블             #
 #############################################
-import math
-import pymysql
 import pandas as pd
-from sqlalchemy import create_engine
-pymysql.install_as_MySQLdb()
-import MySQLdb
-import re
 import numpy as np
 from module.spec_integration.comunication_standard import find_comm_stand
 from module.spec_integration.operation_system import find_os
@@ -45,22 +39,19 @@ from module.spec_integration.size import find_height,find_thickness,find_weight,
 from module.spec_integration.release_date import find_release_date
 from module.spec_integration.color import find_color
 from module.spec_integration.payment import find_payment
+import db_module #db연결 정의모듈 (id,pw 로컬환경따라 다름)
 
-
-
+db_class = db_module.Database() #db연결 생성
 #############################
 # 새로 추가된 기종 갯수
 new = 5
 #############################
 
-engine = create_engine("mysql+mysqldb://root:"+"123123"+"@localhost/gidseller", encoding='utf-8')
-conn = engine.connect()
-
-cetizen = pd.read_sql_table('g5_phone_spec_cetizen',conn)
-danawa = pd.read_sql_table('g5_phone_spec_danawa',conn)
-namu = pd.read_sql_table('g5_phone_spec_namu',conn)
-phone_list = pd.read_sql_table('g5_phone_list',conn)
-phone_spec_test = pd.read_sql_table('phone_spec_test',conn)
+cetizen = pd.read_sql_table('g5_phone_spec_cetizen',db_class.engine_conn)
+danawa = pd.read_sql_table('g5_phone_spec_danawa',db_class.engine_conn)
+namu = pd.read_sql_table('g5_phone_spec_namu',db_class.engine_conn)
+phone_list = pd.read_sql_table('g5_phone_list',db_class.engine_conn)
+phone_spec_test = pd.read_sql_table('phone_spec_test',db_class.engine_conn)
 
 num = len(phone_list)
 for i in range(num-new,num):
@@ -171,8 +162,6 @@ for i in range(num-new,num):
     pass
 
 
-engine = create_engine("mysql+mysqldb://root:"+"123123"+"@localhost/gidseller", encoding='utf-8')
-conn = engine.connect()
 pst = len(phone_spec_test)
 phone_spec_test.replace("",np.NaN,inplace=True)
-phone_spec_test.iloc[pst-new:pst].to_sql(name='phone_spec', con=engine, if_exists='append', index=False)
+phone_spec_test.iloc[pst-new:pst].to_sql(name='phone_spec', con=db_class.engine, if_exists='append', index=False)
