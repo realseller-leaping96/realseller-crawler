@@ -1,6 +1,6 @@
 import pandas as pd
 from bs4 import BeautifulSoup
-import chrome_driver_module #크롬드라이버 연결 정의모듈 (버전,경로 로컬환경따라 다름)
+import module.chrome_driver_module as chrome_driver_module #크롬드라이버 연결 정의모듈 (버전,경로 로컬환경따라 다름)
 
 from module.spec.namuwiki.checking import hasxpath #해당되는 xpath 요소 존재여부 확인하는 함수 => True/False로 리턴
 from module.spec.namuwiki.select_table import select_table #사양테이블 선택

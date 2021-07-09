@@ -5,8 +5,8 @@ import module.spec.namuwiki.main as namu # 나무위키 스펙크롤러
 import module.spec.danawa.main as danawa # 다나와 스펙크롤러
 import pandas as pd
 import numpy as np
-import db_module #db연결 정의모듈 (id,pw 로컬환경따라 다름)
-import chrome_driver_module #크롬드라이버 연결 정의모듈 (버전,경로 로컬환경따라 다름)
+import module.db_module as db_module #db연결 정의모듈 (id,pw 로컬환경따라 다름)
+import module.chrome_driver_module as chrome_driver_module #크롬드라이버 연결 정의모듈 (버전,경로 로컬환경따라 다름)
 
 db_class = db_module.Database() #db연결 생성
 driver = chrome_driver_module.ChromeDriver().driver

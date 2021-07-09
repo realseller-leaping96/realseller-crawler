@@ -2,8 +2,6 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import time
 import re
-import chrome_driver_module #크롬드라이버 연결 정의모듈 (버전,경로 로컬환경따라 다름)
-
 def hasxpath(driver,xpath):
     try:
         driver.find_element_by_xpath(xpath)

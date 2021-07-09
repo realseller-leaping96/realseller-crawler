@@ -39,7 +39,7 @@ from module.spec_integration.size import find_height,find_thickness,find_weight,
 from module.spec_integration.release_date import find_release_date
 from module.spec_integration.color import find_color
 from module.spec_integration.payment import find_payment
-import db_module #db연결 정의모듈 (id,pw 로컬환경따라 다름)
+import module.db_module as db_module #db연결 정의모듈 (id,pw 로컬환경따라 다름)
 
 db_class = db_module.Database() #db연결 생성
 #############################

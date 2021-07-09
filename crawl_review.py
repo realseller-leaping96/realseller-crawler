@@ -5,8 +5,8 @@ from module.review.st11_signup import parse_11_signup # 11번가 완납가입 �
 from module.review.naver_shopping import parse_naver_shopping #네이버쇼핑 리뷰크롤러
 import pandas as pd
 from datetime import datetime
-import db_module #db연결 정의모듈 (id,pw 로컬환경따라 다름)
-import chrome_driver_module #크롬드라이버 연결 정의모듈 (버전,경로 로컬환경따라 다름)
+import module.db_module as db_module #db연결 정의모듈 (id,pw 로컬환경따라 다름)
+import module.chrome_driver_module as chrome_driver_module #크롬드라이버 연결 정의모듈 (버전,경로 로컬환경따라 다름)
 
 db_class = db_module.Database() #db연결 생성
 driver = chrome_driver_module.ChromeDriver().driver
