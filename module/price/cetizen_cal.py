@@ -32,7 +32,7 @@ def parse_by_telecom_maker(telecom,maker,crawl_data,driver,my_dict):
         for nc in range(len(name_code)-1):
             name1 += name_code[nc].text
         code1 = name_code[-1].text
-        price = rows[1].select(".col-lg-3.col-md-0.col-sm-3.col-3.text-right.p13.d-md-none.d-lg-block.clr14.pr-2.no-gutters")
+        price = r.select(".col-lg-3.col-md-0.col-sm-3.col-3.text-right.p13.d-md-none.d-lg-block.clr14.pr-2.no-gutters")
         price1 = price[0].text
         #print(name1, code1, price1)
         my_dict["모델명"] = name1

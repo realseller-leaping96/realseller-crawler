@@ -58,9 +58,10 @@ finally:
 
 #확보된 url들을 url_list 테이블에 밀어넣기
 df_OUTER_JOIN.to_sql(name='url_list', con=db_class.engine, if_exists='append', index=False)
-print("HeidiSQL틀고 url_list 테이블에서 하위 'new'개의 행에 대해서 빈셀 있을경우 수기로 채우기")
-print("--------다 마쳤으면 enter를 누르시오-------------")
-input()
+
+# print("HeidiSQL틀고 url_list 테이블에서 하위 'new'개의 행에 대해서 빈셀 있을경우 수기로 채우기")
+# print("--------다 마쳤으면 enter를 누르시오-------------")
+# input()
 
 
    ###########################################################################
