@@ -2,7 +2,7 @@
 import time
 
 def scroll_to_end(driver):
-    SCROLL_PAUSE_TIME = 2
+    SCROLL_PAUSE_TIME = 1
 
     # Get scroll height
     last_height = driver.execute_script("return document.body.scrollHeight")        

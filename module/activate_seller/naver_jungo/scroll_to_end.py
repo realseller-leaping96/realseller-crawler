@@ -3,9 +3,12 @@ import time
 from datetime import datetime, timedelta
 
 def scroll_to_end(driver):
-    SCROLL_PAUSE_TIME = 2
+    SCROLL_PAUSE_TIME = 1
     # Get scroll height
-    last_height = driver.execute_script("return document.body.scrollHeight")        
+    try: 
+        last_height = driver.execute_script("return document.body.scrollHeight")  
+    except: #중고나라 회원탈퇴한 판매자일경우 alert창 뜨기때문에 무시하고 넘어가기 => 이판매자는 무조건 False처리
+        return 1
 
     while True:
         # Scroll down to bottom                                                      
@@ -20,7 +23,10 @@ def scroll_to_end(driver):
         new_height = driver.execute_script("return document.body.scrollHeight")
         
         post_list = driver.find_elements_by_css_selector('#itemList > li.board_box')
-        last_post = post_list[-1].find_element_by_css_selector('.user_area > .time').text
+        if len(post_list) < 1:
+            return 1
+        else:
+            last_post = post_list[-1].find_element_by_css_selector('.user_area > .time').text
         if last_post.find(":")!= -1:
             current_date = datetime.today().date()
         else:
@@ -31,3 +37,4 @@ def scroll_to_end(driver):
             break
 
         last_height = new_height
+    return 0

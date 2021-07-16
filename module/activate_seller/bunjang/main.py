@@ -56,8 +56,12 @@ def bunjang(crawl_data,seller_list,i,driver):
                 elif last_sell.find("달")!=-1:
                     last_sell = int(last_sell.replace("달","").replace("전","").replace(" ",""))*30
                     last_sell = datetime.today().date() - timedelta(days=last_sell)
+                elif last_sell.find("년")!=-1:
+                    last_sell = int(last_sell.replace("년","").replace("전","").replace(" ",""))*365
+                    last_sell = datetime.today().date() - timedelta(days=last_sell)
                 else: #일단 여기까지 분기될필요 없을것같아 생략
-                    pass
+                    print(last_sell)
+                    last_sell = datetime.today().date() - timedelta(days=60)
 
 
                 #2주간 판매중인 물품수 계산 => 완료
@@ -65,9 +69,9 @@ def bunjang(crawl_data,seller_list,i,driver):
 
 
                 #활동여부 종합판단
-                is_activate = True
-                if datetime.today().date()-last_sell>=timedelta(days=14) or sell_count/dealing_count<0.5:
-                    is_activate = False
+                is_activate = 1
+                if datetime.today().date()-last_sell>=timedelta(days=14):
+                    is_activate = 0
 
                 my_dict = {
                     "vendor_type" : "번개장터", 
@@ -87,7 +91,7 @@ def bunjang(crawl_data,seller_list,i,driver):
                     "last_sell": None,                                                   #가장최근 판매글 게시일
                     "sell_count": None,                                                 #2주간 판매중인 물품 갯수
                     "dealing_smartphone": None,                                      #2주간 스마트폰 품목 취급여부
-                    "is_activate": False                                                #종합적으로 판단한 최종 활동여부
+                    "is_activate": 0                                                #종합적으로 판단한 최종 활동여부
                 }
                 crawl_data = crawl_data.append(pd.DataFrame(my_dict, index=[0]))
     
