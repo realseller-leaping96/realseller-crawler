@@ -9,6 +9,7 @@ from module.db_module import CreateTableIfNotExists
 from sqlalchemy import Table, Column, Integer, String, Boolean, Date
 from module.activate_seller.rearrange_as_id import rearrange_as_id
 from module.activate_seller.naver_jungo.auto_login import auto_login
+from module.activate_seller.naver_jungo.auto_login_for_linux import auto_login_for_liunux
 
 db_class = db_module.Database() #db연결 생성
 
@@ -48,12 +49,14 @@ my_dict = {
 }
 crawl_data = pd.DataFrame(my_dict,index=[0])
 
-seller_list = pd.read_excel('셀러리스트.xlsx').fillna(np.NAN) #입력데이터
-#중고나라 회원인 네이버 아이디 로그인
-auto_login(driver)
+seller_list = pd.read_sql_table('g5_real_seller_list',db_class.engine_conn) #입력데이터
 
-for i in range(len(seller_list)):
-# for i in range(2): #테스트용
+#중고나라 회원인 네이버 아이디 로그인
+# auto_login(driver)
+auto_login_for_liunux(driver)
+
+# for i in range(len(seller_list)):
+for i in range(2): #테스트용
     print(i)
 
     #네이버판매처 크롤링
