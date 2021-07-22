@@ -1,1 +1,0 @@
-auto_login_for_liunux(driver)

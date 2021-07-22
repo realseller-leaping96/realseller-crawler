@@ -1,6 +1,6 @@
 ##############################################
-#           상세스펙 통합테이블 백업코드    #
-#        phone_spec_test 테이블             #
+#           상세스펙 통합테이블 백업코드       #
+#        phone_spec 테이블                  #
 #############################################
 import pandas as pd
 import numpy as np
@@ -154,11 +154,11 @@ def spec_integration(new_index_list):
                 'payment':payment
             }
 
-            phone_spec_test = phone_spec_test.append(pd.DataFrame(integration_row, index=[0]))
+            phone_spec = phone_spec.append(pd.DataFrame(integration_row, index=[0]))
         pass
 
 
-    pst = len(phone_spec_test)
+    pst = len(phone_spec)
     phone_spec.replace("",np.NaN,inplace=True)
     phone_spec.iloc[pst-len(new_index_list):pst].to_sql(name='phone_spec', con=db_class.engine, if_exists='append', index=False)
     db_class.db_conn.close()
