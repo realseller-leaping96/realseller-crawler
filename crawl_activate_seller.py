@@ -50,13 +50,13 @@ my_dict = {
 crawl_data = pd.DataFrame(my_dict,index=[0])
 
 seller_list = pd.read_sql_table('g5_real_seller_list',db_class.engine_conn) #입력데이터
-
+db_class.engine_conn.close()
 #중고나라 회원인 네이버 아이디 로그인
 # auto_login(driver)
 auto_login_for_liunux(driver)
 
-for i in range(len(seller_list)):
-# for i in range(2): #테스트용
+# for i in range(len(seller_list)):
+for i in range(2): #테스트용
     print(i)
 
     #네이버판매처 크롤링
@@ -70,6 +70,7 @@ indexNames = crawl_data[crawl_data['vendor_type'] == "" ].index
 crawl_data.drop(indexNames,inplace=True)
 crawl_data = crawl_data.drop(['index'], axis='columns')
 
+db_class = db_module.Database() #db연결 생성
 activate_seller = pd.read_sql_table('activate_seller',db_class.engine_conn).drop(['as_id'], axis='columns') #기존테이블 로드
 crawl_data = crawl_data.append(activate_seller, ignore_index=True)
 crawl_data = crawl_data.drop_duplicates(['fsl_rs_id','shop_id'], keep='last')

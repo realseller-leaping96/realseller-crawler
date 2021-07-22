@@ -49,7 +49,7 @@ def spec_integration(new_index_list):
     danawa = pd.read_sql_table('g5_phone_spec_danawa',db_class.engine_conn)
     namu = pd.read_sql_table('g5_phone_spec_namu',db_class.engine_conn)
     phone_list = pd.read_sql_table('g5_phone_list',db_class.engine_conn)
-    phone_spec_test = pd.read_sql_table('phone_spec_test',db_class.engine_conn)
+    phone_spec = pd.read_sql_table('phone_spec',db_class.engine_conn)
 
     num = len(phone_list)
     for i in new_index_list:
@@ -159,7 +159,7 @@ def spec_integration(new_index_list):
 
 
     pst = len(phone_spec_test)
-    phone_spec_test.replace("",np.NaN,inplace=True)
-    phone_spec_test.iloc[pst-len(new_index_list):pst].to_sql(name='phone_spec', con=db_class.engine, if_exists='append', index=False)
+    phone_spec.replace("",np.NaN,inplace=True)
+    phone_spec.iloc[pst-len(new_index_list):pst].to_sql(name='phone_spec', con=db_class.engine, if_exists='append', index=False)
     db_class.db_conn.close()
     db_class.engine_conn.close()
