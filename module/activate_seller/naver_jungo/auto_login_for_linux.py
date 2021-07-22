@@ -1,7 +1,7 @@
 def auto_login_for_liunux(driver):
     NAVER={
-        'id': 'leaping19',
-        'passwd':'dkwn!2019'
+        'id': '', #네이버 아이디 입력
+        'passwd':'' #네이버 비밀번호 입력
     }
     myID=NAVER["id"]
     myPASSWD=NAVER["passwd"]

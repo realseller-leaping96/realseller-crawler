@@ -79,7 +79,7 @@ CREATE TABLE if not exists `g5_phone_review` (
 `pr_write_id` VARCHAR(50) NULL DEFAULT NULL COMMENT '게시자 아이디' COLLATE 'utf8_general_ci',
 `pr_upload_date` DATE NULL DEFAULT NULL COMMENT '게시 날짜',
 `pr_title` VARCHAR(255) NULL DEFAULT NULL COMMENT '제목' COLLATE 'utf8_general_ci',
-`pt_text` TEXT NULL DEFAULT NULL COMMENT '내용' COLLATE 'utf8_general_ci',
+`pr_text` TEXT NULL DEFAULT NULL COMMENT '내용' COLLATE 'utf8_general_ci',
 `pr_url` VARCHAR(255) NULL DEFAULT NULL COMMENT '리뷰 링크' COLLATE 'utf8_general_ci',
 `pr_valid` VARCHAR(1) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
 PRIMARY KEY (`pr_id`) USING BTREE

@@ -11,8 +11,8 @@ def copy_input(driver,xpath, input):
     time.sleep(1)
 
 def auto_login(driver):
-    naver_id = """leaping19"""
-    naver_pw = """dkwn!2019"""
+    naver_id = """"""
+    naver_pw = """"""
     driver.get('https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com')
 
     copy_input(driver,'//*[@id="id"]', naver_id)

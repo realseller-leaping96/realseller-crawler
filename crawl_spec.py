@@ -7,25 +7,102 @@ import pandas as pd
 import numpy as np
 import module.db_module as db_module #db연결 정의모듈 (id,pw 로컬환경따라 다름)
 import module.chrome_driver_module as chrome_driver_module #크롬드라이버 연결 정의모듈 (버전,경로 로컬환경따라 다름)
+from module.spec_integration.main import spec_integration
 
 db_class = db_module.Database() #db연결 생성
 driver = chrome_driver_module.ChromeDriver().driver
-
-### 새롭게 추가된 기종의 갯수 입력 
-### 예시) 5개 일경우 => new=5      
-new = 3
 
    ####################################################
   #           기종 URL 확보 크롤링 코드                # 
  #   입력:phone_list 테이블 출력:url_list 테이블      #
 ####################################################
+try: 
+    with db_class.db_conn.cursor() as cursor:
+        sql =( """
+                        CREATE TABLE if not exists `phone_spec` (
+                `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+                `model_name` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `model_code` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `maker` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `communication_standard` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `os` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `display_in` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `display_cm` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+                `display_resolution` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `display_type` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `display_ppi` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `display_aspect_ratio` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `ap_type` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `core` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `core_clock` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `gpu_core` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `sensor_hub` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `modem` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `ram` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `Builtin_memory` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `external_memory` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `front_camera` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `back_camera` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `front_video_resolution` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `flash` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `photo_resolution` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `camera_aperture` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `fingerprint` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `face` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `charging_terminal` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `bluetooth` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `usim_type` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `battery` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `battery_type1` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `battery_type2` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `battery_type3` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `wireless_charge` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `thickness` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `width` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `height` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `weight` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `price` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `release_date` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `country` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `color` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                `payment` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+                PRIMARY KEY (`id`) USING BTREE
+            )
+            COLLATE='latin1_swedish_ci'
+            ENGINE=InnoDB
+            AUTO_INCREMENT=0
+            ;
+            """
+             )
+        cursor.execute(sql)
+
+    db_class.db_conn.commit()
+finally:
+    pass
 
 phone_list = pd.read_sql_table('g5_phone_list',db_class.engine_conn) #최신버전 g5_phone_list 테이블 로드
-num = len(phone_list) #최신버전 테이블에서 하위 "new" 개만 고르기
+phone_spec = pd.read_sql_table('phone_spec',db_class.engine_conn) #최신버전 g5_phone_spec 테이블 로드
+
+new_code_list = []
+new_index_list = []
+for i, row in phone_list.iterrows():
+    index = i
+    phone_list_row = row.copy()
+    is_new = True
+    for i, row in phone_spec.iterrows():
+        if phone_list_row['pl_model_code'] == row['model_code']:
+            is_new = False
+    
+    if is_new:
+        new_code_list.append(phone_list_row['pl_model_code'])
+        new_index_list.append(index)
+
+crawl_code_list = phone_list[phone_list['pl_model_code'].isin(new_code_list)]
+num = len(crawl_code_list) 
 URL = pd.DataFrame(dict(),index=[0])
-URL_cetizen = cetizen.URL(phone_list,driver,URL,num-new,num) #세티즌사이트 URL 확보하기
-URL_danawa = danawa.URL(phone_list,driver,URL,num-new,num) #다나와사이트 URL 확보하기
-URL_namu = namu.URL(phone_list,driver,URL,num-new,num) #나무위키사이트 URL 확보하기
+URL_cetizen = cetizen.URL(crawl_code_list,driver,URL,0,num) #세티즌사이트 URL 확보하기
+URL_danawa = danawa.URL(crawl_code_list,driver,URL,0,num) #다나와사이트 URL 확보하기
+URL_namu = namu.URL(crawl_code_list,driver,URL,0,num) #나무위키사이트 URL 확보하기
 
 join_keys = ['pl_model_code','pl_maker','pl_id','pl_name','pl_model_name'] #URL 데이터 조인
 df_OUTER_JOIN = pd.merge(URL_danawa, URL_cetizen, left_on=join_keys, right_on=join_keys, how='outer')
@@ -73,11 +150,12 @@ df_input = pd.read_sql_table('url_list',db_class.engine)#입력 파일 로드
 df_output = df_init()#출력 형식 로드
 driver = chrome_driver_module.ChromeDriver().driver
 
-num = len(df_input)#최신버전 테이블에서 하위 "new" 개만 고르기
-df_output = namu.add(df_input, driver, df_output,num-new,num)#나무위키 상세스펙 크롤링
+crawl_url_list = df_input[df_input['pl_model_code'].isin(new_code_list)]
+num = len(crawl_url_list) 
+df_output = namu.add(crawl_url_list, driver, df_output,0,num)#나무위키 상세스펙 크롤링
 driver = chrome_driver_module.ChromeDriver().driver
-df_output = cetizen.add(df_input, driver, df_output,num-new,num)#세티즌 상세스펙 크롤링
-df_output = danawa.add(df_input, driver, df_output,num-new,num)#다나와 상세스펙 크롤링
+df_output = cetizen.add(crawl_url_list, driver, df_output,0,num)#세티즌 상세스펙 크롤링
+df_output = danawa.add(crawl_url_list, driver, df_output,0,num)#다나와 상세스펙 크롤링
 df_output = df_output.drop(["카메라 특징"], axis=1)#결과데이터에서 불필요한 컬럼 삭제
 if "생체인식" in df_output.columns:
     df_output = df_output.drop(["생체인식"], axis=1)
@@ -169,4 +247,5 @@ df_danawa.to_sql(name='g5_phone_spec_danawa', con=db_class.engine, if_exists='ap
 #db연결 종료
 db_class.engine_conn.close()
 
-
+#스펙통합테이블 작업
+spec_integration(new_index_list)

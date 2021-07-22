@@ -55,8 +55,8 @@ seller_list = pd.read_sql_table('g5_real_seller_list',db_class.engine_conn) #입
 # auto_login(driver)
 auto_login_for_liunux(driver)
 
-# for i in range(len(seller_list)):
-for i in range(2): #테스트용
+for i in range(len(seller_list)):
+# for i in range(2): #테스트용
     print(i)
 
     #네이버판매처 크롤링
