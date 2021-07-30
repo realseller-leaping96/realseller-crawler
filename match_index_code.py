@@ -1,68 +1,48 @@
-import module.db_module as db_module
-db_class = db_module.Database() #db연결 생성
+from db_model import DbModel
 import pandas as pd
 import numpy as np
 import re
 import regex
+from pprint import pprint
+from mintit import match_mintit_index
+from joongabi import match_joongabi_index
+from bunjang import match_bunjang_index
 
-## 민팃부분
-mintit_index = pd.read_sql_table('mintit_index',db_class.engine_conn)
-mintit_index.insert(8,"pattern",None,True)
+db_model = DbModel("main")
 
-pattern_list = []
-for i, row in mintit_index.iterrows():
-    
-    if row['brand_name'] == '삼성전자':
-        pattern_list.append(re.search("S(M|HW|HV)-[a-zA-Z][0-9]+",row['mintit_key']).group())
-        
-    elif row['brand_name'] == 'LG전자' :
-        if re.search("L(GM|M|G)-[a-zA-Z]+[0-9]+",row['mintit_key']):
-            pattern_list.append(re.search("L(GM|M|G)-[a-zA-Z]+[0-9]+",row['mintit_key']).group())
-        else:
-            pattern_list.append("엘지기타")
-        
-    elif row['brand_name'] == '애플':
-        pattern_list.append("애플")
-    else:
-        pattern_list.append()
-mintit_index["pattern"] = pattern_list
+phone_list = db_model.get_table_dataframe("g5_phone_list")
 
+mintit_index = match_mintit_index(db_model,phone_list)
 
-# 출고가크롤러부분
-price_index = pd.read_sql_table('price_list',db_class.engine_conn)
-price_index.insert(5,"pattern",None,True)
-pattern_list = []
-for i, row in price_index.iterrows():
-    text = ""
-    if row['model_code'] != None :
-        text = regex.sub("(?<=[0-9]+)[a-zA-Z]+.*","",row['model_code'])
-    if len(text) < 3:
-        text = None
-    pattern_list.append(text)
-price_index["pattern"] = pattern_list
+# pprint(mintit_index.head(5))
 
-## 중가비 부분
-joongabi_index = pd.read_sql_table('joongabi_index',db_class.engine_conn)
-joongabi_index.insert(6,"pattern",None,True)
-pattern_list = []
-for i,row in joongabi_index.iterrows():
-    if row['brand_name'] == "apple":
-        pattern_list.append("애플")
-    elif row['brand_name'] == "samsung":
-        pattern_list.append(re.search("S(M|HW|HV)-[a-zA-Z][0-9]+",row['model_code']).group())
-    elif row['brand_name'] == "lg":
-        pattern_list.append(re.search("L(GM|M|G)-[a-zA-Z]+[0-9]+",row['model_code']).group())
-joongabi_index["pattern"] = pattern_list
+joongabi_index = match_joongabi_index(db_model,phone_list)
 
-##번장부분
-bunjang_index = pd.read_sql_table('bunjang_index',db_class.engine_conn)
-bunjang_index.insert(5,"pattern",None,True)
-pattern_list = []
-for i,row in bunjang_index.iterrows():
-    if row['bj_code'][0] == "S":
-        pattern_list.append(re.search("S(M|HW|HV)-[a-zA-Z][0-9]+",row['bj_code']).group())
-    elif row['bj_code'][0] == "L":
-        pattern_list.append(re.search("L(GM|M|G)-[a-zA-Z]+[0-9]+",row['bj_code']).group())
-    elif row['bj_code'][0:2] == "iP":
-        pattern_list.append("애플")
-bunjang_index["pattern"] = pattern_list
+# pprint(joongabi_index.head(5))
+
+bunjang_index = match_bunjang_index(db_model,phone_list)
+
+# pprint(bunjang_index.head(5))
+
+db_model.end()
+
+join_keys = ['pattern','storage'] #모델명으로 데이터 조인
+b_merge = bunjang_index.drop('id',axis=1).astype({'storage': 'float'})
+j_merge = joongabi_index.drop('id',axis=1).fillna(0).astype({'storage': 'float'})
+m_merge = mintit_index.fillna(0).astype({'storage': 'float'})
+df_OUTER_JOIN = pd.merge(b_merge, j_merge, left_on=join_keys, right_on=join_keys, how='outer')
+df_OUTER_JOIN = pd.merge(df_OUTER_JOIN,m_merge, left_on=join_keys, right_on=join_keys, how='outer')
+# display(df_OUTER_JOIN)
+result = df_OUTER_JOIN.drop(['name','brand_id_x','brand_name_x','model_id_x','model_name_x','id','generation','retail_price',
+                            'brand_id_y','brand_name_y','model_id_y','model_name_y'],axis=1)
+result = result[['pattern', 'storage', 'key','model_code','mintit_key']]
+result = result.fillna(0)
+result = result.astype({'storage': 'int'})
+result = result.rename(columns={'key':'번장키','model_code':'중가비키','mintit_key':'민팃키'})
+result = result.replace(0,np.NAN).drop_duplicates()
+# display(result)
+result_for_join = result.rename(columns={'pattern':'pl_model_code'})
+result_for_join = pd.merge(result_for_join,phone_list, left_on='pl_model_code', right_on='pl_model_code', how='inner')
+# display(result_for_join[['pl_id','pl_model_name','pl_model_code','storage' ,'번장키', '중가비키','민팃키']].replace(0,np.NaN))
+result_for_join = result_for_join[['pl_model_code','storage' ,'번장키', '중가비키','민팃키']].replace(0,np.NaN)
+result_for_join.columns = ['original_code', 'price_code', 'mintit_code','bunjang_code','joongabi_code']
