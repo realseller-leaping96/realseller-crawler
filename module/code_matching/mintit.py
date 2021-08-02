@@ -1,6 +1,6 @@
 import re
-from utility import xstr as xstr
-from utility import aka_table as aka_table
+from module.code_matching.utility import xstr as xstr
+from module.code_matching.utility import aka_table as aka_table
 
 def match_mintit_index(db_model,phone_list):
     mintit_index = db_model.get_table_dataframe("mintit_index")
@@ -72,8 +72,15 @@ def match_mintit_index(db_model,phone_list):
             
             
         #용량부분
-        if re.search("(?<=-)[0-9]+(G|T)",mintit_row['mintit_key']) is not None:
-            storage_list.append(re.search("(?<=-)[0-9]+(G|T)",mintit_row['mintit_key']).group())
+        if re.search("(?<=-)[0-9]+(G|T)",mintit_row['mintit_key']\
+            .replace(" 5G","").replace(" 4G","").replace(" 3G","")) is not None:
+            storage_list.append(re.search("(?<=-)[0-9]+(G|T)",mintit_row['mintit_key']\
+                .replace(" 5G","").replace(" 4G","").replace(" 3G","")).group())
+
+        elif re.search("(?<= )[0-9]+(G|T)",mintit_row['mintit_key']\
+            .replace(" 5G","").replace(" 4G","").replace(" 3G","")) is not None:
+            storage_list.append(re.search("(?<= )[0-9]+(G|T)",mintit_row['mintit_key']\
+                .replace(" 5G","").replace(" 4G","").replace(" 3G","")).group())
             
         elif pattern_list[-1] in list(phone_list['pl_model_code']):
             guess_single = "".join(list(phone_list[phone_list['pl_model_code'] == pattern_list[-1]]['pl_storage'])).split("|")

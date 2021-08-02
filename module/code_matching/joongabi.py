@@ -1,6 +1,6 @@
 import re
-from utility import xstr as xstr
-from utility import aka_table as aka_table
+from module.code_matching.utility import xstr as xstr
+from module.code_matching.utility import aka_table as aka_table
 
 def match_joongabi_index(db_model,phone_list):
     joongabi_index = db_model.get_table_dataframe("joongabi_index")
@@ -63,15 +63,27 @@ def match_joongabi_index(db_model,phone_list):
         else:
             pattern_list.append(None)
             
+            
         #용량부분
-        if re.search("(?<=-)[0-9]+(G|T)",joongabi_row['model_code']) is not None:
-            storage_list.append(re.search("(?<=-)[0-9]+(G|T)",joongabi_row['model_code']).group())
+        if re.search("(?<=-)[0-9]+(G|T)",joongabi_row['model_code']\
+            .replace(" 5G","").replace(" 4G","").replace(" 3G","")) is not None:
+            storage_list.append(re.search("(?<=-)[0-9]+(G|T)",joongabi_row['model_code']\
+                .replace(" 5G","").replace(" 4G","").replace(" 3G","")).group())
+
+        elif re.search("(?<=_)[0-9]+(G|T)",joongabi_row['model_code']\
+            .replace(" 5G","").replace(" 4G","").replace(" 3G","")) is not None:
+            storage_list.append(re.search("(?<=_)[0-9]+(G|T)",joongabi_row['model_code']\
+                .replace(" 5G","").replace(" 4G","").replace(" 3G","")).group())
+
+        elif re.search("(?<= )[0-9]+(G|T)(B)?",joongabi_row['model_code']\
+            .replace(" 5G","").replace(" 4G","").replace(" 3G","")) is not None:
+            storage_list.append(re.search("(?<= )[0-9]+(G|T)(B)?",joongabi_row['model_code']\
+                .replace(" 5G","").replace(" 4G","").replace(" 3G","")).group())
             
-        elif re.search("(?<=_)[0-9]+(G|T)",joongabi_row['model_code']) is not None:
-            storage_list.append(re.search("(?<=_)[0-9]+(G|T)",joongabi_row['model_code']).group())
-            
-        elif re.search("(?<= )[0-9]+(G|T)(B)?",joongabi_row['model_name']) is not None:
-            storage_list.append(re.search("(?<= )[0-9]+(G|T)(B)?",joongabi_row['model_name']).group())
+        elif re.search("(?<= )[0-9]+(G|T)(B)?",joongabi_row['model_name']\
+            .replace(" 5G","").replace(" 4G","").replace(" 3G","")) is not None:
+            storage_list.append(re.search("(?<= )[0-9]+(G|T)(B)?",joongabi_row['model_name']\
+                .replace(" 5G","").replace(" 4G","").replace(" 3G","")).group())
         
         #단일용량 기종 거르는 부분
         elif pattern_list[-1] in list(phone_list['pl_model_code']):
@@ -82,13 +94,14 @@ def match_joongabi_index(db_model,phone_list):
                 storage_list.append(None)
         else:
             storage_list.append(None)
+
         
     joongabi_index["pattern"] = pattern_list
     for i in range(len(storage_list)):
         if storage_list[i] and storage_list[i].find("G")!=-1:
             storage_list[i] = storage_list[i].replace("GB","").replace("G","")
         elif storage_list[i] and storage_list[i].find("T")!=-1:
-            storage_list[i] = int(storage_list[i].replace("TB","").replace("T",""))*1024
+            storage_list[i] = str(int(storage_list[i].replace("TB","").replace("T",""))*1024)
     joongabi_index["storage"] = storage_list
 
     return joongabi_index

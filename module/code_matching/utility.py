@@ -52,6 +52,23 @@ aka_table = {
         },
         
     },
+    "price_list":{
+        0:{
+            "column":"model_code",
+            "key":"LGM-V300LW",
+            "value":"LGM-V300S"
+        },
+        1:{
+            "column":"model_code",
+            "key":"LGM-V300SW",
+            "value":"LGM-V300S"
+        },
+        2:{
+            "column":"model_code",
+            "key":"LGM-V300KW",
+            "value":"LGM-V300S"
+        }
+    }
 }
 
 def xstr(s):

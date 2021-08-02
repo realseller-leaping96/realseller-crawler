@@ -1,6 +1,6 @@
 import re
-from utility import xstr as xstr
-from utility import aka_table as aka_table
+from module.code_matching.utility import xstr as xstr
+from module.code_matching.utility import aka_table as aka_table
 
 def match_bunjang_index(db_model,phone_list):
     bunjang_index = db_model.get_table_dataframe("bunjang_index")
@@ -14,9 +14,9 @@ def match_bunjang_index(db_model,phone_list):
         for i in range(len(aka_table["bunjang"])):
             if (row[aka_table["bunjang"][i]["column"]].lower().replace(" ",""))\
             .find(aka_table["bunjang"][i]["key"].lower().replace(" ",""))!=-1:
-                print(aka_table["bunjang"][i]["column"],\
-                aka_table["bunjang"][i]["key"],\
-                aka_table["bunjang"][i]["value"])
+                # print(aka_table["bunjang"][i]["column"],\
+                # aka_table["bunjang"][i]["key"],\
+                # aka_table["bunjang"][i]["value"])
                 aka_value = aka_table["bunjang"][i]["value"]
                 is_aka_matched = 1
         
