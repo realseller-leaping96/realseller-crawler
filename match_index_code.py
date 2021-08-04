@@ -5,7 +5,10 @@ from module.code_matching.bunjang import match_bunjang_index
 from module.code_matching.price_list import match_price_list
 from module.code_matching.merge import merge_index
 
-db_model = DbModel("main")
+from sqlalchemy import Table, Column, Integer, String, Boolean, Date
+from module.db.db_model import CreateTableIfNotExists
+
+db_model = DbModel("main") #code_matching 테이블 없을경우 정의해줌
 
 phone_list = db_model.get_table_dataframe("g5_phone_list")
 

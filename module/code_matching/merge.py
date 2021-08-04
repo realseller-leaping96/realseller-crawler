@@ -23,7 +23,7 @@ def merge_index(bunjang_index,joongabi_index,mintit_index,price_list,phone_list)
     result_for_join = result.rename(columns={'pattern':'pl_model_code'})
     result_for_join = pd.merge(result_for_join,phone_list, left_on='pl_model_code', right_on='pl_model_code', how='inner')
     # display(result_for_join[['pl_id','pl_model_name','pl_model_code','storage' ,'번장키', '중가비키','민팃키']].replace(0,np.NaN))
-    result_for_join = result_for_join[['pl_model_code','storage' ,'번장키', '중가비키','민팃키','price_list_key']].replace(0,np.NaN)
+    result_for_join = result_for_join[['pl_model_code','storage' ,'민팃키', '번장키','중가비키','price_list_key']].replace(0,np.NaN)
 
     result_for_join.columns = ['original_code', 'storage', 'mintit_code','bunjang_code','joongabi_code','price_code']
     result_for_join = result_for_join.replace("0",np.NAN)
