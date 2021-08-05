@@ -1,0 +1,86 @@
+﻿import dbconfig
+import 내가1, 또슬2
+
+class DBModel :
+	def __init__(self,dbname):
+
+	dbconfig.test
+	self.db = pymysql.connect(host=dbstr['host'], user=dbstr['user'], password=dbstr['password'], db=dbstr['database'], charset='utf8', autocommit=True)
+	
+	def end(self):
+		print('DB꺼짐')
+		self.db.close()
+
+	def get_seller_data(self):
+		cur = self.db.cursor(pymysql.cursors.DictCursor)
+		query ='select .....'
+		cur.execute(query)
+		result = cur.fetchall()
+		cur.close()
+		return result
+
+	 def insert_phone_list(self,*param):
+	        cur = self.db.cursor(pymysql.cursors.DictCursor)
+	        cols = "`"+('`,`').join(list(param[0].keys()))+"`"
+	        vals = (' %s,' * len(list(param[0].keys())))[:-1]
+
+	        dump = [list(i.values()) for i in param]
+
+	        query = f'''insert into g5_phone_list({cols}) values({vals})'''
+
+	        cur.executemany(query,dump)
+	        cur.close()
+
+
+
+----------------------
+dbconfig.py
+
+
+class DBconfig:
+	def __init__(self,dbname):
+	......
+	.....
+	....
+	def test(self):
+		return dbconfig[dbname]	
+
+
+
+mainDB = DBModel('main')
+----------------------------------------------------
+
+def run():
+	self.run1()
+	self.run2()
+	mainDB.insert_phone_list(*[['a','b','c'],['a','b','c']])
+	mainDB.db.close()
+
+try:
+	
+exception:
+
+finaliy:
+	mainDB.db.close()
+
+
+* = args
+** = kwargs
+def 어떤함수(sub = 1,*args,**kwargs):
+	for i in args:
+		print(i)
+	return 0
+
+어떤함수(*[1,3,5])
+
+def 어던(now, **param):
+	return adafsaf
+
+어던('today', **[1,3,5])
+
+어떤함수(sub = 4, age=1,num=3,total=5)
+args = 1,3,5
+
+kwargs  = {age:1,....}
+
+def qqqq(*args):

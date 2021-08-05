@@ -16,6 +16,8 @@ import re
 from module.db.db_orm_table import code_matching
 from module.db.db_orm_table import Base
 from sqlalchemy.orm import sessionmaker
+import module.db.db_orm_table as orm_class
+from sqlalchemy import update
 
 
 class DbModel:
@@ -63,59 +65,59 @@ class DbModel:
     def get_table_dataframe(self,table_name):
         return pd.read_sql_table(table_name,self.engine) 
 
-    def update_code_matching(self,result):
-        ex_code_matching = pd.read_sql_table("code_matching",self.engine)
+    # def update_code_matching(self,result):
+    #     ex_code_matching = pd.read_sql_table("code_matching",self.engine)
 
-        cur = self.db.cursor(pymysql.cursors.DictCursor)
-        query = "DELETE FROM code_matching"
-        cur.execute(query)
-        cur.close()
+    #     cur = self.db.cursor(pymysql.cursors.DictCursor)
+    #     query = "DELETE FROM code_matching"
+    #     cur.execute(query)
+    #     cur.close()
 
-        temp_result = ex_code_matching.append(result).\
-            reset_index().drop(['id','index'],axis=1).\
-            reset_index().drop(['index'],axis=1).\
-            drop_duplicates(['original_code','storage','mintit_code',\
-                'bunjang_code','joongabi_code'],keep="last").\
-            reset_index().drop(['index'],axis=1)
+    #     temp_result = ex_code_matching.append(result).\
+    #         reset_index().drop(['id','index'],axis=1).\
+    #         reset_index().drop(['index'],axis=1).\
+    #         drop_duplicates(['original_code','storage','mintit_code',\
+    #             'bunjang_code','joongabi_code'],keep="last").\
+    #         reset_index().drop(['index'],axis=1)
 
-        temp_result.to_sql(name='code_matching', con=self.engine, if_exists='append', index=False)
+    #     temp_result.to_sql(name='code_matching', con=self.engine, if_exists='append', index=False)
 
-        cur = self.db.cursor(pymysql.cursors.DictCursor)
-        query = """
-            SELECT 
-                cm.id, 
-                cm.original_code, 
-                cm.`storage`,
-                max(cm.mintit_code), 
-                max(cm.bunjang_code),
-                max(cm.joongabi_code), 
-                max(cm.price_code) 
-                FROM code_matching cm
+    #     cur = self.db.cursor(pymysql.cursors.DictCursor)
+    #     query = """
+    #         SELECT 
+    #             cm.id, 
+    #             cm.original_code, 
+    #             cm.`storage`,
+    #             max(cm.mintit_code), 
+    #             max(cm.bunjang_code),
+    #             max(cm.joongabi_code), 
+    #             max(cm.price_code) 
+    #             FROM code_matching cm
 
-            GROUP BY cm.original_code, cm.`storage`
-        """
+    #         GROUP BY cm.original_code, cm.`storage`
+    #     """
         
-        cur.execute(query)
-        result = cur.fetchall()
-        final_result = pd.DataFrame(result).drop('id',axis=1)
-        final_result.columns = ['original_code', 'storage', 'mintit_code','bunjang_code','joongabi_code','price_code']
-        cur.close()
+    #     cur.execute(query)
+    #     result = cur.fetchall()
+    #     final_result = pd.DataFrame(result).drop('id',axis=1)
+    #     final_result.columns = ['original_code', 'storage', 'mintit_code','bunjang_code','joongabi_code','price_code']
+    #     cur.close()
 
-        cur = self.db.cursor(pymysql.cursors.DictCursor)
-        query = "DELETE FROM code_matching"
-        cur.execute(query)
-        cur.close()
+    #     cur = self.db.cursor(pymysql.cursors.DictCursor)
+    #     query = "DELETE FROM code_matching"
+    #     cur.execute(query)
+    #     cur.close()
         
-        final_result.to_sql(name='code_matching', con=self.engine, if_exists='append', index=False)
+    #     final_result.to_sql(name='code_matching', con=self.engine, if_exists='append', index=False)
 
-        cur = self.db.cursor(pymysql.cursors.DictCursor)
-        query = """
-            UPDATE code_matching cm 
-            SET cm.bunjang_code = REPLACE(cm.bunjang_code, '_r', '');
-        """
-        cur.execute(query)
-        cur.close()
-        return
+    #     cur = self.db.cursor(pymysql.cursors.DictCursor)
+    #     query = """
+    #         UPDATE code_matching cm 
+    #         SET cm.bunjang_code = REPLACE(cm.bunjang_code, '_r', '');
+    #     """
+    #     cur.execute(query)
+    #     cur.close()
+    #     return
 
     # def init_autoincrement(self,table_name,pk_name):
     #     cur = self.db.cursor(pymysql.cursors.DictCursor)
@@ -152,6 +154,37 @@ class DbModel:
 
         session.close()
         
+    def update_code_matching(self,result):
+        ex_code_matching = pd.read_sql_table("code_matching",self.engine)
+
+        Session = sessionmaker(bind=self.engine,autocommit=True, autoflush=True)
+        session = Session()
+
+        temp_result = ex_code_matching.append(result).\
+            reset_index().drop(['id','index'],axis=1).\
+            reset_index().drop(['index'],axis=1).\
+            drop_duplicates(['original_code','storage','mintit_code',\
+                'bunjang_code','joongabi_code'],keep="last").\
+            reset_index().drop(['index'],axis=1)
+
+        final_result =  temp_result.append(ex_code_matching.drop('id',axis=1))\
+            .groupby(['original_code','storage']).apply(lambda x: x)\
+            .drop_duplicates()
+
+        code_matching = orm_class.code_matching    
+        
+        session.query(code_matching).delete()
+
+        final_result.to_sql(name='code_matching', con=self.engine, if_exists='append', index=False)
+
+        session.execute("\
+            UPDATE code_matching cm \
+            SET cm.bunjang_code = REPLACE(cm.bunjang_code, '_r', '');\
+        ")
+
+        session.close()
+        return
+
 
     
 
